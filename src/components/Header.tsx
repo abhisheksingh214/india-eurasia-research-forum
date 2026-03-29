@@ -192,14 +192,14 @@ export default function Header() {
       {/* ── Mobile Menu (Right Drawer) ── */}
       <AnimatePresence>
         {isMenuOpen && (
-          <div className="fixed inset-0 z-[100] lg:hidden pointer-events-auto">
-            {/* Full-screen Backdrop */}
+          <div className="fixed inset-0 z-[100] lg:hidden">
+            {/* Full-screen Backdrop (Separate Layer for perfect clicks) */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMenuOpen(false)}
-              className="absolute inset-0 bg-[#0A192F]/40 backdrop-blur-md"
+              className="absolute inset-0 bg-[#0A192F]/60 backdrop-blur-sm pointer-events-auto"
             />
             
             {/* Drawer Panel */}
@@ -207,71 +207,79 @@ export default function Header() {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 bottom-0 w-[280px] bg-white shadow-[-20px_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col"
+              transition={{ type: 'spring', damping: 28, stiffness: 220 }}
+              className="absolute right-0 top-0 bottom-0 w-[280px] bg-white shadow-[-20px_0_80px_-15px_rgba(0,0,0,0.4)] flex flex-col pointer-events-auto"
             >
               {/* Drawer Header */}
-              <div className="p-6 flex items-center justify-between border-b border-gray-100">
-                <div className="flex items-center gap-2">
-                  <img src="/logo.svg" className="w-8 h-8 object-contain" alt="" />
-                  <div className="font-black text-[10px] text-[#1B3B5F] leading-tight tracking-wider font-sans">
+              <div className="p-7 flex items-center justify-between border-b border-gray-50">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center p-1.5 shadow-inner">
+                    <img src="/logo.svg" className="w-full h-full object-contain" alt="" />
+                  </div>
+                  <div className="font-black text-[11px] text-[#1B3B5F] leading-[1.1] tracking-[0.1em] font-sans">
                     <div>INDIA EURASIA</div>
-                    <div className="opacity-50 text-[8px]">RESEARCH FORUM</div>
+                    <div className="text-[#E87722] text-[8px] tracking-[0.2em] mt-0.5">RESEARCH FORUM</div>
                   </div>
                 </div>
                 <button 
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 rounded-full hover:bg-gray-100 text-[#1B3B5F] transition-colors"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 text-[#1B3B5F] hover:bg-[#E87722]/10 hover:text-[#E87722] transition-all"
                 >
                   <X size={20} />
                 </button>
               </div>
 
               {/* Drawer Links */}
-              <div className="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+              <div className="flex-1 overflow-y-auto pt-8 pb-12 px-5 space-y-1.5">
                 {[
                   { label: 'Home', to: '/', icon: <Globe size={18} /> },
                   { label: 'Publications', to: '/publications', icon: <BookOpen size={18} /> },
-                  { label: 'Experts Team', to: '/team', icon: <Mail size={18} /> },
+                  { label: 'Expert Team', to: '/team', icon: <Mail size={18} /> },
                   { label: 'Write for Us', to: '/write-for-us', icon: <Send size={18} /> },
-                  { label: 'Events Calendar', to: '/events', icon: <CalendarDays size={18} /> },
-                  { label: 'Contact Us', to: '/contact', icon: <Facebook size={18} /> },
+                  { label: 'Events', to: '/events', icon: <CalendarDays size={18} /> },
+                  { label: 'Contact', to: '/contact', icon: <Facebook size={18} /> },
                 ].map(link => (
                   <Link
                     key={link.label}
                     to={link.to}
                     onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center gap-4 px-5 py-4 rounded-2xl text-[#1B3B5F] font-bold text-base hover:bg-[#1B3B5F]/5 active:scale-95 transition-all group"
+                    className="flex items-center gap-4 px-5 py-4 rounded-2xl text-[#1B3B5F] font-bold text-[15px] hover:bg-[#1B3B5F]/5 active:bg-[#1B3B5F]/10 active:scale-[0.98] transition-all group"
                   >
-                    <span className="text-[#1B3B5F]/20 group-hover:text-[#E87722] transition-colors">{link.icon}</span>
+                    <span className="text-[#1B3B5F]/30 group-hover:text-[#E87722] transition-colors">{link.icon}</span>
                     {link.label}
                   </Link>
                 ))}
                 
-                <div className="pt-4 px-2">
+                <div className="pt-8 px-2">
                   <Link
                     to="/events/volga-to-ganga"
                     onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center gap-4 px-5 py-4 rounded-3xl bg-gradient-to-r from-[#1B3B5F] to-[#2A4B7C] text-white font-bold text-base shadow-xl shadow-[#1B3B5F]/20 active:scale-95 transition-all"
+                    className="flex items-center gap-4 px-6 py-5 rounded-[2.5rem] bg-[#1B3B5F] text-white font-bold text-base shadow-xl shadow-[#1B3B5F]/20 active:scale-95 transition-all group overflow-hidden relative"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                      <img src="/ganga logo.svg" className="w-5 h-5 brightness-0 invert" alt="" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#1B3B5F] to-[#E87722] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center relative z-10 p-1.5">
+                      <img src="/ganga logo.svg" className="w-full h-full brightness-0 invert" alt="" />
                     </div>
-                    Volga to Ganga
+                    <span className="relative z-10">Volga to Ganga</span>
                   </Link>
                 </div>
               </div>
 
               {/* Drawer Footer */}
-              <div className="p-8 border-t border-gray-100 bg-gray-50/50">
-                <div className="flex justify-center gap-8 mb-4">
-                  <Facebook size={20} className="text-[#1B3B5F]/30 hover:text-[#1B3B5F] transition-colors cursor-pointer" />
-                  <Twitter size={20} className="text-[#1B3B5F]/30 hover:text-[#1B3B5F] transition-colors cursor-pointer" />
-                  <Instagram size={20} className="text-[#1B3B5F]/30 hover:text-[#1B3B5F] transition-colors cursor-pointer" />
+              <div className="p-8 border-t border-gray-100 bg-gray-50/30">
+                <div className="flex justify-center gap-8 mb-6">
+                  <Facebook size={20} className="text-[#1B3B5F]/40 hover:text-[#1B3B5F] transition-colors cursor-pointer" />
+                  <Twitter size={20} className="text-[#1B3B5F]/40 hover:text-[#1B3B5F] transition-colors cursor-pointer" />
+                  <Instagram size={20} className="text-[#1B3B5F]/40 hover:text-[#1B3B5F] transition-colors cursor-pointer" />
                 </div>
-                <p className="text-[10px] text-center text-gray-400 font-bold uppercase tracking-widest">
-                  © 2026 IERF
-                </p>
+                <div className="flex flex-col items-center gap-1">
+                  <p className="text-[9px] text-gray-400 font-bold uppercase tracking-[0.3em]">
+                    India Eurasia Research Forum
+                  </p>
+                  <p className="text-[8px] text-gray-300 font-bold uppercase tracking-widest">
+                    © 2026 • All Rights Reserved
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
