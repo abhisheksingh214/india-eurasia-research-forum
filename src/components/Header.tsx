@@ -189,46 +189,92 @@ export default function Header() {
         </div>
       </motion.div>
 
-      {/* ── Mobile Menu ── */}
+      {/* ── Mobile Menu (Right Drawer) ── */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="lg:hidden mx-4 mt-2 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-[#1B3B5F]/10 border border-gray-100 overflow-hidden pointer-events-auto"
-          >
-            <div className="p-4 space-y-1">
-              {[
-                { label: 'Home', to: '/' },
-                { label: 'About Us', to: '/#about' },
-                { label: 'Publications', to: '/publications' },
-                { label: 'Team', to: '/team' },
-                { label: 'Write for Us', to: '/write-for-us' },
-                { label: 'All Events', to: '/events' },
-                { label: 'Contact Us', to: '/contact' },
-              ].map(link => (
-                <Link
-                  key={link.label}
-                  to={link.to}
+          <div className="fixed inset-0 z-[100] lg:hidden pointer-events-auto">
+            {/* Full-screen Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute inset-0 bg-[#0A192F]/40 backdrop-blur-md"
+            />
+            
+            {/* Drawer Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="absolute right-0 top-0 bottom-0 w-[280px] bg-white shadow-[-20px_0_60px_-15px_rgba(0,0,0,0.3)] flex flex-col"
+            >
+              {/* Drawer Header */}
+              <div className="p-6 flex items-center justify-between border-b border-gray-100">
+                <div className="flex items-center gap-2">
+                  <img src="/logo.svg" className="w-8 h-8 object-contain" alt="" />
+                  <div className="font-black text-[10px] text-[#1B3B5F] leading-tight tracking-wider font-sans">
+                    <div>INDIA EURASIA</div>
+                    <div className="opacity-50 text-[8px]">RESEARCH FORUM</div>
+                  </div>
+                </div>
+                <button 
                   onClick={() => setIsMenuOpen(false)}
-                  className="block px-4 py-3 rounded-xl text-[#1B3B5F] font-semibold text-sm hover:bg-[#1B3B5F]/6 hover:text-[#E87722] transition-colors"
+                  className="p-2 rounded-full hover:bg-gray-100 text-[#1B3B5F] transition-colors"
                 >
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                to="/events/volga-to-ganga"
-                onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl text-[#1B3B5F] font-semibold text-sm hover:bg-[#E87722]/8 hover:text-[#E87722] transition-colors"
-              >
-                <span className="w-6 h-6 rounded-md bg-[#E87722]/10 flex items-center justify-center">
-                  <img src="/ganga logo.svg" className="w-4 h-4" />
-                </span>
-                Volga to Ganga
-              </Link>
-            </div>
-          </motion.div>
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Drawer Links */}
+              <div className="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+                {[
+                  { label: 'Home', to: '/', icon: <Globe size={18} /> },
+                  { label: 'Publications', to: '/publications', icon: <BookOpen size={18} /> },
+                  { label: 'Experts Team', to: '/team', icon: <Mail size={18} /> },
+                  { label: 'Write for Us', to: '/write-for-us', icon: <Send size={18} /> },
+                  { label: 'Events Calendar', to: '/events', icon: <CalendarDays size={18} /> },
+                  { label: 'Contact Us', to: '/contact', icon: <Facebook size={18} /> },
+                ].map(link => (
+                  <Link
+                    key={link.label}
+                    to={link.to}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center gap-4 px-5 py-4 rounded-2xl text-[#1B3B5F] font-bold text-base hover:bg-[#1B3B5F]/5 active:scale-95 transition-all group"
+                  >
+                    <span className="text-[#1B3B5F]/20 group-hover:text-[#E87722] transition-colors">{link.icon}</span>
+                    {link.label}
+                  </Link>
+                ))}
+                
+                <div className="pt-4 px-2">
+                  <Link
+                    to="/events/volga-to-ganga"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center gap-4 px-5 py-4 rounded-3xl bg-gradient-to-r from-[#1B3B5F] to-[#2A4B7C] text-white font-bold text-base shadow-xl shadow-[#1B3B5F]/20 active:scale-95 transition-all"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+                      <img src="/ganga logo.svg" className="w-5 h-5 brightness-0 invert" alt="" />
+                    </div>
+                    Volga to Ganga
+                  </Link>
+                </div>
+              </div>
+
+              {/* Drawer Footer */}
+              <div className="p-8 border-t border-gray-100 bg-gray-50/50">
+                <div className="flex justify-center gap-8 mb-4">
+                  <Facebook size={20} className="text-[#1B3B5F]/30 hover:text-[#1B3B5F] transition-colors cursor-pointer" />
+                  <Twitter size={20} className="text-[#1B3B5F]/30 hover:text-[#1B3B5F] transition-colors cursor-pointer" />
+                  <Instagram size={20} className="text-[#1B3B5F]/30 hover:text-[#1B3B5F] transition-colors cursor-pointer" />
+                </div>
+                <p className="text-[10px] text-center text-gray-400 font-bold uppercase tracking-widest">
+                  © 2026 IERF
+                </p>
+              </div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </header>
