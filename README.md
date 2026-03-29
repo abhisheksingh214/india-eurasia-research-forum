@@ -72,4 +72,4 @@ npm run preview
 
 ## 📄 License & Copyright
 © 2026 India Eurasia Research Forum. All rights reserved.
- 
+  
