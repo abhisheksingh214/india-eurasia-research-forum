@@ -28,15 +28,19 @@ export default function Publications() {
               className="w-full pl-16 pr-6 py-4 bg-gray-50 rounded-2xl outline-none focus:ring-4 focus:ring-[#E87722]/10 transition-all border border-transparent focus:border-[#E87722]/30 text-lg font-medium"
             />
           </div>
-          <div className="flex gap-2 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
-            {categories.map((category, index) => (
-              <button 
-                key={index}
-                className={`px-6 py-3 rounded-xl text-xs font-black whitespace-nowrap transition-all uppercase tracking-widest ${index === 0 ? 'bg-[#1B3B5F] text-white shadow-xl shadow-blue-900/20' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
-              >
-                {category}
-              </button>
-            ))}
+          <div className="relative w-full lg:w-auto overflow-hidden">
+            <div className="flex gap-2 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide mask-fade-right">
+              {categories.map((category, index) => (
+                <button 
+                  key={index}
+                  className={`px-6 py-3 rounded-xl text-xs font-black whitespace-nowrap transition-all uppercase tracking-widest ${index === 0 ? 'bg-[#1B3B5F] text-white shadow-xl shadow-blue-900/20' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+            {/* Mobile Scroll Indicator (only visible on small screens) */}
+            <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-white to-transparent pointer-events-none lg:hidden"></div>
           </div>
         </div>
 
@@ -70,7 +74,7 @@ export default function Publications() {
                 </div>
                 
                 <Link to={`/publications/${pub.id}`} className="group/title">
-                  <h3 className="text-2xl font-black text-[#1B3B5F] mb-6 group-hover/title:text-[#E87722] transition-colors line-clamp-2 leading-tight tracking-tight">
+                  <h3 className="text-2xl font-black text-[#1B3B5F] mb-6 group-hover/title:text-[#E87722] transition-colors line-clamp-2 leading-tight tracking-tight publication-card-title">
                     {pub.title}
                   </h3>
                 </Link>

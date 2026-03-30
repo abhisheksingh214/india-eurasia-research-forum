@@ -15,6 +15,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Responsive Font Scaling */
+h1 {
+  font-size: clamp(2.25rem, 8vw, 4.5rem);
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 5vw, 2.75rem);
+  line-height: 1.2;
+}
+
+.subhero-title {
+  font-size: clamp(1.75rem, 6vw, 3.5rem) !important;
+}
+
+@media (max-width: 640px) {
+  .publication-card-title {
+    font-size: 1.1rem !important;
+    line-height: 1.4 !important;
+  }
+}
+
 @layer utilities {
   .glass {
     background: rgba(255, 255, 255, 0.7);
