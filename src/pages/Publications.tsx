@@ -68,7 +68,7 @@ export default function Publications() {
                 </div>
               </div>
               
-              <div className="p-5 sm:p-8 lg:p-10 flex flex-col flex-grow">
+              <div className="p-5 sm:p-8 lg:p-10 flex flex-col flex-grow overflow-hidden">
                 <div className="flex items-center space-x-4 text-gray-400 text-[10px] font-black uppercase tracking-[0.15em] mb-6">
                   <span className="flex items-center"><Calendar size={14} className="mr-2 text-[#E87722]"/> {pub.date}</span>
                 </div>
