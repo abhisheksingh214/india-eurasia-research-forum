@@ -32,6 +32,6 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: ./
+          server-dir: ./domains/indiaeurasia.org/public_html/
           timeout: 120000
         timeout-minutes: 10
