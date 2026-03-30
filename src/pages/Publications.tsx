@@ -8,7 +8,7 @@ export default function Publications() {
   const categories = ['All', 'Reports', 'Policy Briefs', 'Articles', 'Working Papers'];
   
   return (
-    <div className="flex flex-col min-h-screen bg-[#F8FAFC] pb-24">
+    <div className="flex flex-col min-h-screen bg-[#F8FAFC] pb-24 overflow-x-hidden">
       <SubHero 
         title="Publications" 
         subtitle="Insights and analysis from our research network on the shifting dynamics of India-Eurasia relations."
@@ -16,10 +16,10 @@ export default function Publications() {
       />
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 -mt-10 relative z-20 w-full">
         
         {/* Search & Filter Bar */}
-        <div className="bg-white rounded-[2.5rem] shadow-2xl p-6 border border-gray-100 mb-16 flex flex-col lg:flex-row gap-6 items-center backdrop-blur-xl bg-white/95">
+        <div className="bg-white rounded-2xl sm:rounded-[2.5rem] shadow-2xl p-4 sm:p-6 border border-gray-100 mb-10 sm:mb-16 flex flex-col lg:flex-row gap-4 sm:gap-6 items-center backdrop-blur-xl bg-white/95">
           <div className="relative flex-grow w-full">
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-300" size={22} />
             <input 
@@ -44,7 +44,7 @@ export default function Publications() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
           {publications.map((pub, index) => (
             <motion.div 
               key={pub.id}
@@ -52,7 +52,7 @@ export default function Publications() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm border border-gray-100 hover:shadow-2xl group flex flex-col transition-all duration-500"
+              className="bg-white rounded-2xl sm:rounded-[2.5rem] overflow-hidden shadow-sm border border-gray-100 hover:shadow-2xl group flex flex-col transition-all duration-500"
             >
               <div className="h-64 relative overflow-hidden">
                 <img 
@@ -68,22 +68,22 @@ export default function Publications() {
                 </div>
               </div>
               
-              <div className="p-10 flex flex-col flex-grow">
+              <div className="p-5 sm:p-8 lg:p-10 flex flex-col flex-grow">
                 <div className="flex items-center space-x-4 text-gray-400 text-[10px] font-black uppercase tracking-[0.15em] mb-6">
                   <span className="flex items-center"><Calendar size={14} className="mr-2 text-[#E87722]"/> {pub.date}</span>
                 </div>
                 
                 <Link to={`/publications/${pub.id}`} className="group/title">
-                  <h3 className="text-2xl font-black text-[#1B3B5F] mb-6 group-hover/title:text-[#E87722] transition-colors line-clamp-2 leading-tight tracking-tight publication-card-title">
+                  <h3 className="text-xl sm:text-2xl font-black text-[#1B3B5F] mb-4 sm:mb-6 group-hover/title:text-[#E87722] transition-colors line-clamp-2 leading-tight tracking-tight publication-card-title break-words">
                     {pub.title}
                   </h3>
                 </Link>
                 
-                <p className="text-gray-500 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">
+                <p className="text-gray-500 text-sm leading-relaxed mb-6 sm:mb-8 line-clamp-3 font-medium break-words">
                   {pub.description}
                 </p>
                 
-                <div className="mt-auto flex items-center justify-between pt-8 border-t border-gray-100">
+                <div className="mt-auto flex items-center justify-between pt-6 sm:pt-8 border-t border-gray-100">
                   <span className="text-xs font-black text-[#1B3B5F] uppercase tracking-widest">{pub.author}</span>
                   <div className="flex items-center space-x-2">
                      <Link 
