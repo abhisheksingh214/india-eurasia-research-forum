@@ -58,7 +58,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-lg md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto font-medium opacity-90 leading-relaxed"
           >
-            India Eurasia Research Forum (IERF) is an independent flagship initiative dedicated to strengthening strategic dialogue and cooperation.
+            India Eurasia Research Forum (IERF) is an independent initiative dedicated to promoting research, dialogue and people to people cooperation between India and Eurasia.
           </motion.p>
           
           <motion.div
@@ -67,19 +67,15 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a 
-              href="#about" 
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+            <Link 
+              to="/about" 
               className="group relative inline-flex items-center justify-center px-10 py-5 text-lg font-black text-white bg-[#E87722] rounded-full hover:bg-[#d66a1d] transition-all shadow-[0_0_20px_rgba(232,119,34,0.3)] hover:shadow-[0_0_30px_rgba(232,119,34,0.5)] hover:-translate-y-1"
             >
               EXPLORE OUR MISSION
               <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Link>
             <Link 
-              to="/publications" 
+              to="/research" 
               className="px-10 py-5 text-lg font-bold text-white border-2 border-white/30 rounded-full hover:bg-white/10 backdrop-blur-sm transition-all"
             >
               READ RESEARCH
@@ -116,7 +112,7 @@ export default function Home() {
                 Welcome to <span className="text-[#E87722]">IERF</span>
               </h2>
               <p className="text-gray-600 text-xl leading-relaxed mb-8">
-                IERF is India’s first independent research network dedicated to a comprehensive study of the Eurasian region, a vast landscape comprising Russia, Central Asia, and the Caucasus.
+                India Eurasia Research Forum (IERF) is an independent initiative dedicated to promoting research, dialogue and people to people cooperation between India and Eurasia.
               </p>
               <div className="grid grid-cols-2 gap-8 mb-12">
                 <div className="space-y-2">
@@ -213,7 +209,7 @@ export default function Home() {
                 <h5 className="text-xl font-bold mb-4 line-clamp-2 leading-snug">Instability in Central Asia: Strategic Implications</h5>
                 <p className="text-white/60 text-sm mb-8 line-clamp-3">Evaluating regional security shifts and their long-term impact on India's neighborhood policy.</p>
               </div>
-              <Link to="/publications" className="relative z-10 group inline-flex items-center justify-center w-full py-4 bg-[#E87722] rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-colors">
+              <Link to="/research" className="relative z-10 group inline-flex items-center justify-center w-full py-4 bg-[#E87722] rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-600 transition-colors">
                 READ NOW <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>

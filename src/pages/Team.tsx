@@ -1,197 +1,190 @@
-import { motion } from 'motion/react';
-import { Linkedin, Mail, ArrowUpRight } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Linkedin, ChevronDown } from 'lucide-react';
 import SubHero from '../components/SubHero';
 
-const teamMembers = [
+interface Person {
+  name: string;
+  image: string;
+  bio: string;
+  linkedin: string;
+}
+
+const leadership: Person[] = [
   {
     name: 'Rahul Gupta',
-    role: 'Leadership',
     image: '/images/image10.jpg',
-    bio: 'Rahul Gupta is a Senior Research Fellow with the Centre for Russian and Central Asian Studies at the School of International Studies, JNU. His research focuses on Eurasian geopolitics, regional connectivity, and international organisations in the Global South.'
+    bio: 'Rahul Gupta is a Senior Research Fellow with the Centre for Russian and Central Asian Studies at the School of International Studies, Jawaharlal Nehru University, New Delhi, India. He is currently pursuing a PhD at the same institution. His research interests include Eurasian geopolitics, regional connectivity between South and Central Asia, and international organisations in the Global South, with a focus on BRICS and SCO. An early career researcher specialising in post-Soviet studies, he has published extensively, including with SAGE, Routledge and the London School of Economics and Political Science Review of Books.',
+    linkedin: 'https://www.linkedin.com/in/rahul-gupta-a8907110a/',
   },
   {
     name: 'Sujal Yadav',
-    role: 'Leadership',
     image: '/images/image8.jpg',
-    bio: 'Sujal Yadav is a Senior Research Fellow at JNU, specialising in Russian foreign policy, cultural diplomacy, and literary studies. He has served as an official interpreter at major international platforms including the SCO Forum.'
+    bio: 'Sujal Yadav is a Senior Research Fellow with the Centre for Russian and Central Asian Studies at the School of International Studies, Jawaharlal Nehru University, New Delhi, India. He is currently pursuing a PhD at the same institution. His research interests include Russian foreign policy, cultural diplomacy, Russian literature, and cultural studies. An early career researcher specialising in contemporary Russian studies, he has published in reputed academic outlets, including the Gorchakov Public Diplomacy Fund Journal, and other national and international publications. He has also worked as an official interpreter at major international events, including the SCO-RATS Forum (2022), the SCO Film Festival (2023), and the India-Russia Business Forum (2025).',
+    linkedin: 'https://www.linkedin.com/in/sujal-yadav-235025208/',
   },
+];
+
+const advisor: Person = {
+  name: 'Dr. Pravesh Kumar Gupta',
+  image: '/images/image1.jpg',
+  bio: 'Dr Pravesh Kumar Gupta is an Associate Fellow at the Vivekananda International Foundation (VIF) and an expert on Eurasian geopolitics. He holds a PhD in Central Asian Studies from the School of International Studies, Jawaharlal Nehru University (JNU), New Delhi. His research focuses on the society and politics of the Central Asian Republics, the geopolitics of Central and South Asia, energy security, and trans-regional connectivity and energy linkages between Central and South Asia.\n\nDr Gupta\'s views are regularly published in leading platforms, such as The Hindustan Times, The Financial Express, Dunyo Information Agency (Information Agency of the Ministry of Foreign Affairs of the Republic of Uzbekistan), and the Valdai Discussion Club. He has authored a book and contributed chapters to several edited volumes in his areas of specialisation. He has also served as an International Election Observer during the Presidential Elections in Uzbekistan in 2021 and the constitutional referendum in 2023.',
+  linkedin: 'https://www.linkedin.com/in/dr-pravesh-kumar-gupta-57a607187/',
+};
+
+const scholarlyNetwork: Person[] = [
   {
     name: 'Kishan Srinivas',
-    role: 'Team Member',
     image: '/images/image9.jpg',
-    bio: 'Kishan holds a B.Tech in ECE and is a Master’s student of Political Science at DU. His research explores the intersection of Science, Technology, and International Relations.'
+    bio: 'Kishan Srinivas is a Master\'s student of Political Science at the Department of Political Science, University of Delhi, India. He holds a B.Tech in Electronics and Communication Engineering from Presidency University, Bangalore, India. With an interdisciplinary academic background, Kishan\'s areas of research interest include the intersection of Science and Technology with Political Science and International Relations. His research also includes studying the role of technology in Diplomacy and International Relations. He has previously worked as an AI and Geopolitical Risk intern at Hozint.',
+    linkedin: 'https://www.linkedin.com/in/kishansrinivas070520',
   },
   {
     name: 'Arkadyute Nath',
-    role: 'Team Member',
     image: '/images/image7.jpg',
-    bio: 'Arkadyute is an English literature graduate from Hansraj College. He manages social media and programs at TGMC under ArtSpeaks India.'
+    bio: 'Arkadyute has completed his undergraduate studies in English literature from Hansraj College, University of Delhi. He is currently working as a Program Assistant and Social Media Manager at TGMC, under ArtSpeaks India.',
+    linkedin: 'https://www.linkedin.com/in/arkadyute-nath-503008379/',
+  },
+  {
+    name: 'Saumya Tomar',
+    image: '/images/saumya.jpg',
+    bio: 'Saumya Tomar is a Junior Research Fellow at the Centre for Russian and Central Asian Studies, School of International Studies, Jawaharlal Nehru University, New Delhi. She is a PhD candidate at the same institution. Her research interests include climate change, environmental security and environmental governance in Eurasia, with a special focus on the Arctic and Baltic Region. Her work examines how environmental transformation influences governance structures, disrupts economic activity, and shapes geopolitical dynamics in the Post-Soviet space.',
+    linkedin: 'https://www.linkedin.com/in/saumya-tomar-6b2a76345/',
   },
   {
     name: 'Ravi Raj',
-    role: 'Team Member',
     image: '/images/image14.jpg',
-    bio: 'Ravi Raj is a research scholar at JNU focusing on nuclear nonproliferation, conflict resolution in Eurasia, and energy geopolitics.'
+    bio: 'Ravi Raj is a research scholar at the Centre for Russian and Central Asian Studies, School of International Studies, Jawaharlal Nehru University (JNU), New Delhi. His research focuses on nuclear nonproliferation, peacebuilding and conflict resolution in Eurasia, energy geopolitics, and India–Russia relations. He has participated in several international academic and policy forums, including the Nasser Fellowship in Egypt. He regularly contributes analytical pieces on global and regional security affairs.',
+    linkedin: 'https://www.linkedin.com/in/ravi-raj-165145278/',
   },
   {
     name: 'Vaibhavi Gupta',
-    role: 'Team Member',
     image: '/images/image5.jpg',
-    bio: 'Vaibhavi is a Junior Research Fellow at JNU. Her research interests include critical theories of IR, Russian philosophy, and non-traditional global actors.'
+    bio: 'Vaibhavi Gupta is a Junior Research Fellow with the Centre for Russian and Central Asian Studies, School of International Studies, Jawaharlal Nehru University, New Delhi, India. She is currently pursuing a PhD at the same institution. Her research interests include post-colonial and critical theories of IR, Russian literature and philosophy. As an early career researcher specialising in post-Soviet and contemporary Russian studies, her primary focus is on how non-traditional actors/institutions interact with traditional actors to shape global affairs.',
+    linkedin: 'https://www.linkedin.com/in/vaibhavi-g-67363b226/',
   },
   {
     name: 'Aditya Harsh',
-    role: 'Team Member',
     image: '/images/image11.png',
-    bio: 'Aditya is a PhD candidate at JNU researching foreign policy analysis and Russia’s strategic positioning within global frameworks.'
+    bio: 'Aditya is a PhD candidate at the Centre for Russian and Central Asian Studies (CRCAS), School of International Studies, Jawaharlal Nehru University (JNU). His research engages with foreign policy analysis, especially Russia\'s foreign policy behaviour and India\'s strategic positioning within Russian policy frameworks. He has written on issues such as soft power, shifting geopolitical alignments, and the evolving dynamics of regional and global politics. His research aims to provide policy-relevant insights into contemporary geopolitical trends and their implications for India\'s foreign policy and regional security.',
+    linkedin: 'https://www.linkedin.com/in/aditya-harsh-474050250/',
   },
   {
     name: 'Avik Sarkar',
-    role: 'Team Member',
     image: '/images/image3.jpg',
-    bio: 'Avik is a Senior Research Fellow at JNU, working on agrarian political economy and non-Eurocentric political philosophy.'
+    bio: 'Avik Sarkar is a Senior Research Fellow with the Centre for Political Studies, Jawaharlal Nehru University, New Delhi. He works at the intersection of agrarian political economy and Subaltern Studies in India. His PhD thesis interrogates the fall of the world\'s longest-serving democratically elected Communist government in the Indian state of West Bengal. He is also interested in colonial-era Indian engagements with Germany and Russia. With deep interest in political philosophy, he advocates the need to blend Indian and non-Eurocentric conceptual universes.',
+    linkedin: '',
   },
   {
     name: 'Harshal Raj Patel',
-    role: 'Team Member',
     image: '/images/image12.jpg',
-    bio: 'Harshal is a Philosophy graduate and political consultant. He contributes regularly to The Tribune on geopolitics and cultural history.'
+    bio: 'Harshal Raj Patel completed his undergraduate studies in Philosophy at Hansraj College, University of Delhi. His final-year dissertation examined meritocracy and the concept of justice. His research interests include society, diplomatic history, and South Asian affairs. Alongside his academic pursuits, he has worked as a consultant at a New Delhi-based political consultancy. He is also a freelance columnist and contributes regularly to The Tribune, covering nationalism, geopolitics, and diplomatic history.',
+    linkedin: 'https://www.linkedin.com/in/harshal-raj-patel-b81682259/',
   },
   {
     name: 'Abhishek Singh',
-    role: 'Team Member',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2000&auto=format&fit=crop',
-    bio: 'Contributing to the research and operational goals of the India Eurasia Research Forum.'
-  }
+    image: '/images/abhishek.jpg',
+    bio: 'Contributing to the research and operational goals of the India Eurasia Research Forum.',
+    linkedin: '',
+  },
 ];
 
-const advisor = {
-  name: 'Dr. Pravesh Kumar Gupta',
-  role: 'Research Advisor',
-  image: '/images/image1.jpg',
-  bio: 'Dr Pravesh Kumar Gupta is an Associate Fellow at the Vivekananda International Foundation (VIF) and an expert on Eurasian geopolitics. He holds a PhD in Central Asian Studies from JNU. His research focuses on the society and politics of Central Asian Republics, energy security, and trans-regional connectivity.\n\nDr Gupta’s views are regularly published in leading platforms such as The Hindustan Times, Financial Express, and the Valdai Discussion Club.'
-};
-
-export default function Team() {
-  const leadership = teamMembers.filter(m => m.role === 'Leadership');
-  const members = teamMembers.filter(m => m.role === 'Team Member');
+function ProfileCard({ person, large = false }: { person: Person; large?: boolean }) {
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F8FAFC]">
-      <SubHero 
-        title="Our Experts" 
-        subtitle="The diverse team of scholars and researchers bridge-building between India and the Eurasian heartland."
-        breadcrumb={[{ label: 'Team' }]}
-      />
-
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Advisor Section - Premium Highlight */}
-          <div className="mb-32">
-            <div className="text-center mb-16">
-              <h2 className="text-[#E87722] font-black text-sm uppercase tracking-[0.3em] mb-4">Academic Guidance</h2>
-              <h3 className="text-4xl font-black text-[#1B3B5F]">Research Advisor</h3>
-            </div>
-            
-            <motion.div 
-               initial={{ opacity: 0, y: 30 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               className="bg-[#1B3B5F] rounded-[3rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row relative"
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className={`bg-white ${large ? 'rounded-2xl sm:rounded-[2.5rem] p-6 sm:p-10 shadow-xl' : 'rounded-2xl p-5 sm:p-8 shadow-sm hover:shadow-xl'} border border-gray-100 transition-all group`}
+    >
+      <div className={`flex ${large ? 'flex-col items-center text-center' : 'items-center'} gap-4 sm:gap-5`}>
+        <div className={`${large ? 'w-32 h-32 sm:w-40 sm:h-40' : 'w-16 h-16'} rounded-full overflow-hidden flex-shrink-0 border-4 border-gray-50 shadow-inner`}>
+          <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
+        </div>
+        <div className={large ? '' : 'flex-1 min-w-0'}>
+          <h4 className={`${large ? 'text-2xl' : 'text-lg'} font-black text-[#1B3B5F] leading-tight`}>{person.name}</h4>
+          {person.linkedin && (
+            <a
+              href={person.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 mt-1 text-xs font-bold text-[#0077B5] hover:underline"
             >
-              <div className="lg:w-1/3 relative h-96 lg:h-auto">
-                <img src={advisor.image} alt={advisor.name} className="absolute inset-0 w-full h-full object-cover object-top" />
-                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#1B3B5F] via-transparent to-transparent"></div>
-              </div>
-              <div className="lg:w-2/3 p-12 lg:p-20 text-white relative">
-                <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-                   <img src="/logo.svg" className="w-64 grayscale invert" alt="" />
-                </div>
-                <h4 className="text-4xl font-black mb-2 tracking-tight">{advisor.name}</h4>
-                <div className="text-[#E87722] font-black text-xs uppercase tracking-[0.2em] mb-8">{advisor.role}</div>
-                <div className="space-y-6">
-                  {advisor.bio.split('\n\n').map((p, i) => (
-                    <p key={i} className="text-white/70 text-lg leading-relaxed font-medium">{p}</p>
-                  ))}
-                </div>
-                <div className="flex space-x-4 mt-12">
-                   <a href="#" className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center hover:bg-[#E87722] transition-all"><Linkedin size={20} /></a>
-                   <a href="#" className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center hover:bg-[#E87722] transition-all"><Mail size={20} /></a>
-                </div>
+              <Linkedin size={14} /> LinkedIn
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Expandable Bio */}
+      <div className="mt-4">
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="flex items-center gap-1 text-xs font-black text-[#1B3B5F] uppercase tracking-widest hover:text-[#E87722] transition-colors"
+        >
+          {expanded ? 'Hide Bio' : 'Full Bio'}
+          <ChevronDown size={14} className={`transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`} />
+        </button>
+        <AnimatePresence>
+          {expanded && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="pt-4 space-y-3">
+                {person.bio.split('\n\n').map((p, i) => (
+                  <p key={i} className="text-gray-500 text-sm leading-relaxed">{p}</p>
+                ))}
               </div>
             </motion.div>
-          </div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+}
 
-          {/* Leadership Section */}
-          <div className="mb-32">
-            <div className="text-center mb-16">
-              <h2 className="text-[#E87722] font-black text-sm uppercase tracking-[0.3em] mb-4">Core Management</h2>
-              <h3 className="text-4xl font-black text-[#1B3B5F]">Leadership</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-              {leadership.map((member, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="bg-white rounded-[2.5rem] p-10 shadow-xl shadow-blue-900/5 border border-gray-100 flex flex-col items-center text-center group"
-                >
-                  <div className="w-40 h-40 rounded-[2rem] overflow-hidden border-8 border-gray-50 mb-8 shadow-inner transition-transform group-hover:scale-105 duration-500">
-                    <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
-                  </div>
-                  <h4 className="text-2xl font-black text-[#1B3B5F] mb-2">{member.name}</h4>
-                  <div className="text-[#E87722] font-black text-[10px] uppercase tracking-[0.2em] mb-6">{member.role}</div>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-8 font-medium">{member.bio}</p>
-                  <div className="flex space-x-3">
-                     <a href="#" className="p-3 bg-gray-50 rounded-xl text-[#1B3B5F] hover:bg-[#1B3B5F] hover:text-white transition-all"><Linkedin size={18} /></a>
-                     <a href="#" className="p-3 bg-gray-50 rounded-xl text-[#1B3B5F] hover:bg-[#1B3B5F] hover:text-white transition-all"><Mail size={18} /></a>
-                  </div>
-                </motion.div>
+export default function Team() {
+  return (
+    <div className="flex flex-col min-h-screen bg-[#F8FAFC]">
+      <SubHero
+        title="Our People"
+        subtitle=""
+        breadcrumb={[{ label: 'Our People' }]}
+      />
+
+      <section className="py-16 sm:py-24">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Leadership */}
+          <div className="mb-20">
+            <h2 className="text-center text-3xl sm:text-4xl font-black text-[#1B3B5F] mb-12 tracking-tight">Leadership</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {leadership.map((person) => (
+                <ProfileCard key={person.name} person={person} large />
               ))}
             </div>
           </div>
 
-          {/* Full Team Grid */}
-          <div>
-            <div className="text-center mb-16">
-              <h2 className="text-[#E87722] font-black text-sm uppercase tracking-[0.3em] mb-4">Scholarly Network</h2>
-              <h3 className="text-4xl font-black text-[#1B3B5F]">Research Fellows</h3>
+          {/* Research Advisor */}
+          <div className="mb-20">
+            <h2 className="text-center text-3xl sm:text-4xl font-black text-[#1B3B5F] mb-12 tracking-tight">Research Advisor</h2>
+            <div className="max-w-2xl mx-auto">
+              <ProfileCard person={advisor} large />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {members.map((member, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="bg-white/50 backdrop-blur-sm p-8 rounded-[2rem] border border-gray-100 hover:bg-white hover:shadow-2xl hover:shadow-blue-900/10 transition-all group"
-                >
-                  <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 rounded-2xl overflow-hidden mr-4 flex-shrink-0">
-                      <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-black text-[#1B3B5F] leading-tight group-hover:text-[#E87722] transition-colors">{member.name}</h4>
-                      <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{member.role}</div>
-                    </div>
-                  </div>
-                  <p className="text-gray-500 text-xs leading-relaxed font-medium mb-6 line-clamp-4">
-                    {member.bio}
-                  </p>
-                  <div className="flex items-center justify-between pt-6 border-t border-gray-50">
-                    <div className="flex space-x-2">
-                       <a href="#" className="p-2 text-gray-300 hover:text-[#1B3B5F] transition-colors"><Linkedin size={16} /></a>
-                       <a href="#" className="p-2 text-gray-300 hover:text-[#1B3B5F] transition-colors"><Mail size={16} /></a>
-                    </div>
-                    <button className="text-[10px] font-black text-[#1B3B5F] uppercase tracking-widest flex items-center group-hover:text-[#E87722] transition-colors">
-                      Full Bio <ArrowUpRight size={14} className="ml-1" />
-                    </button>
-                  </div>
-                </motion.div>
+          </div>
+
+          {/* Scholarly Network */}
+          <div>
+            <h2 className="text-center text-3xl sm:text-4xl font-black text-[#1B3B5F] mb-12 tracking-tight">Scholarly Network</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {scholarlyNetwork.map((person) => (
+                <ProfileCard key={person.name} person={person} />
               ))}
             </div>
           </div>

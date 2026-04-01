@@ -29,7 +29,7 @@ export default function VolgaToGanga() {
                viewport={{ once: true }}
                className="flex justify-center mb-16"
             >
-              <div className="h-40 flex items-center justify-center p-8 bg-white/5 backdrop-blur-sm rounded-[2rem] border border-gray-200/50 shadow-sm">
+              <div className="h-64 flex items-center justify-center">
                 <img src="/ganga logo.svg" alt="Volga to Ganga Logo" className="h-full object-contain" />
               </div>
             </motion.div>
@@ -60,9 +60,9 @@ export default function VolgaToGanga() {
                 Stay tuned for updates on our upcoming hybrid and physical dialogue series.
               </p>
               <div className="h-10 w-px bg-white/20 mb-8"></div>
-              <button className="flex items-center text-xs font-black uppercase tracking-widest hover:text-[#E87722] transition-colors group">
+              <a href="/contact" className="flex items-center text-xs font-black uppercase tracking-widest hover:text-[#E87722] transition-colors group">
                  Join the Waitlist <ArrowRight size={16} className="ml-3 group-hover:translate-x-2 transition-transform" />
-              </button>
+              </a>
             </motion.div>
           </motion.div>
         </div>

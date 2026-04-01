@@ -7,23 +7,23 @@ export default function Contact() {
     {
       icon: <Mail size={24} />,
       title: 'Email Us',
-      desc: 'For general inquiries and collaborations:',
+      desc: 'For general inquiries and research collaborations',
       value: 'connect@indiaeurasia.org',
       href: 'mailto:connect@indiaeurasia.org'
     },
     {
       icon: <MapPin size={24} />,
       title: 'Visit Us',
-      desc: 'Our administrative headquarters:',
+      desc: '',
       value: 'New Delhi, India',
       href: '#'
     },
     {
       icon: <Phone size={24} />,
       title: 'Call Us',
-      desc: 'Mon-Fri, 9am - 6pm IST:',
-      value: '+91 (0) 11 2345 6789',
-      href: 'tel:+911123456789'
+      desc: '',
+      value: '+91 7982288501',
+      href: 'tel:+917982288501'
     }
   ];
 

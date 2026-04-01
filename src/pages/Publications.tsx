@@ -5,14 +5,14 @@ import { publications } from '../data/publications';
 import SubHero from '../components/SubHero';
 
 export default function Publications() {
-  const categories = ['All', 'Reports', 'Policy Briefs', 'Articles', 'Working Papers'];
+  const categories = ['All', 'Perspectives', 'Commentary', 'Stories from Eurasia'];
   
   return (
     <div className="flex flex-col min-h-screen bg-[#F8FAFC] pb-24 overflow-x-hidden">
       <SubHero 
-        title="Publications" 
+        title="Research and Analysis" 
         subtitle="Insights and analysis from our research network on the shifting dynamics of India-Eurasia relations."
-        breadcrumb={[{ label: 'Publications' }]}
+        breadcrumb={[{ label: 'Research and Analysis' }]}
       />
 
       {/* Main Content */}

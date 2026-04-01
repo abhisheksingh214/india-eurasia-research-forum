@@ -46,7 +46,6 @@ export default function WriteForUs() {
       <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-20">
-            <h2 className="text-[#E87722] font-black text-sm uppercase tracking-[0.3em] mb-4">Opportunities</h2>
             <h3 className="text-4xl md:text-5xl font-black text-[#1B3B5F]">Submission Categories</h3>
           </div>
 
@@ -108,9 +107,13 @@ export default function WriteForUs() {
                 <Mail size={150} />
               </div>
               <h3 className="text-4xl font-black mb-8 tracking-tight">Ready to publish?</h3>
-              <p className="text-white/60 text-lg mb-10 font-medium leading-relaxed">
+              <p className="text-white/60 text-lg mb-6 font-medium leading-relaxed">
                 Please send your submission along with a brief author bio (50 words) and a profile picture to our editorial team.
               </p>
+              <div className="bg-white/10 rounded-2xl px-6 py-4 mb-8 border border-white/10">
+                <p className="text-white/50 text-xs font-black uppercase tracking-widest mb-1">Send submissions to</p>
+                <a href="mailto:submissions@indiaeurasia.org" className="text-[#E87722] text-lg font-black hover:underline">submissions@indiaeurasia.org</a>
+              </div>
               <a 
                 href="mailto:submissions@indiaeurasia.org" 
                 className="group relative inline-flex items-center justify-center px-10 py-5 bg-[#E87722] text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-orange-600 transition-all shadow-xl hover:-translate-y-1"

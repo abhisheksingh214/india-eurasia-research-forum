@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Facebook, Twitter, Instagram, Menu, X, ChevronDown, Send, BookOpen, CalendarDays, Globe } from 'lucide-react';
+import { Mail, Facebook, Twitter, Instagram, Menu, X, ChevronDown, Send, BookOpen, CalendarDays, Globe, Users, PenLine, MessageSquare, Compass } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEventsOpen, setIsEventsOpen] = useState(false);
-  const [isPublicationsOpen, setIsPublicationsOpen] = useState(false);
+  const [isResearchOpen, setIsResearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function Header() {
             }`}
           >
             <NavLink to="/" label="Home" scrolled={scrolled} />
-            <NavLink to="/#about" label="About" scrolled={scrolled} />
+            <NavLink to="/about" label="About Us" scrolled={scrolled} />
 
             {/* Events dropdown */}
             <div
@@ -89,18 +89,11 @@ export default function Header() {
                   >
                     <div className="p-2">
                       <DropdownItem
-                        to="/events"
-                        icon={<CalendarDays size={16} className="text-[#1B3B5F]" />}
-                        bg="bg-[#1B3B5F]/8"
-                        title="All Events"
-                        desc="View the IERF calendar"
-                      />
-                      <DropdownItem
                         to="/events/volga-to-ganga"
                         icon={<img src="/ganga logo.svg" className="w-4 h-4 object-contain" />}
                         bg="bg-[#E87722]/10"
                         title="Volga to Ganga"
-                        desc="Flagship Dialogue Series"
+                        desc="Dialogue Series"
                       />
                     </div>
                   </motion.div>
@@ -108,17 +101,17 @@ export default function Header() {
               </AnimatePresence>
             </div>
 
-            {/* Publications dropdown */}
+            {/* Research and Analysis dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setIsPublicationsOpen(true)}
-              onMouseLeave={() => setIsPublicationsOpen(false)}
+              onMouseEnter={() => setIsResearchOpen(true)}
+              onMouseLeave={() => setIsResearchOpen(false)}
             >
               <button className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${scrolled ? 'text-[#1B3B5F] hover:bg-[#1B3B5F]/6' : 'text-white hover:bg-white/10'}`}>
-                Publications <ChevronDown size={13} className={`transition-transform duration-200 ${isPublicationsOpen ? 'rotate-180' : ''}`} />
+                Research & Analysis <ChevronDown size={13} className={`transition-transform duration-200 ${isResearchOpen ? 'rotate-180' : ''}`} />
               </button>
               <AnimatePresence>
-                {isPublicationsOpen && (
+                {isResearchOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: 8, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -128,18 +121,25 @@ export default function Header() {
                   >
                     <div className="p-2">
                       <DropdownItem
-                        to="/publications"
+                        to="/research"
                         icon={<BookOpen size={16} className="text-[#1B3B5F]" />}
                         bg="bg-blue-500/10"
-                        title="Research Papers"
-                        desc="In-depth geopolitical analysis"
+                        title="Perspectives"
+                        desc="Analytical articles on Eurasia"
                       />
                       <DropdownItem
-                        to="/publications"
-                        icon={<Send size={16} className="text-purple-600" />}
+                        to="/research"
+                        icon={<MessageSquare size={16} className="text-purple-600" />}
                         bg="bg-purple-500/10"
-                        title="Special Notes"
-                        desc="Expert commentary & insights"
+                        title="Commentary"
+                        desc="Timely analysis of developments"
+                      />
+                      <DropdownItem
+                        to="/research"
+                        icon={<Compass size={16} className="text-emerald-600" />}
+                        bg="bg-emerald-500/10"
+                        title="Stories from Eurasia"
+                        desc="Travel accounts & cultural portraits"
                       />
                     </div>
                   </motion.div>
@@ -147,7 +147,7 @@ export default function Header() {
               </AnimatePresence>
             </div>
 
-            <NavLink to="/team" label="Team" scrolled={scrolled} />
+            <NavLink to="/our-people" label="Our People" scrolled={scrolled} />
           </nav>
         </div>
 
@@ -233,11 +233,12 @@ export default function Header() {
               <div className="flex-1 overflow-y-auto pt-8 pb-12 px-5 space-y-1.5">
                 {[
                   { label: 'Home', to: '/', icon: <Globe size={18} /> },
-                  { label: 'Publications', to: '/publications', icon: <BookOpen size={18} /> },
-                  { label: 'Expert Team', to: '/team', icon: <Mail size={18} /> },
+                  { label: 'About Us', to: '/about', icon: <BookOpen size={18} /> },
+                  { label: 'Research & Analysis', to: '/research', icon: <PenLine size={18} /> },
+                  { label: 'Our People', to: '/our-people', icon: <Users size={18} /> },
                   { label: 'Write for Us', to: '/write-for-us', icon: <Send size={18} /> },
                   { label: 'Events', to: '/events', icon: <CalendarDays size={18} /> },
-                  { label: 'Contact', to: '/contact', icon: <Facebook size={18} /> },
+                  { label: 'Contact', to: '/contact', icon: <Mail size={18} /> },
                 ].map(link => (
                   <Link
                     key={link.label}

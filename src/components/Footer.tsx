@@ -21,14 +21,14 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-sm">
-              An independent research and public diplomacy flagship platform dedicated to strengthening dialogue and deepening cooperation between India and Eurasia.
+              An independent research and public diplomacy platform dedicated to strengthening dialogue and deepening cooperation between India and Eurasia.
             </p>
             <div className="flex items-center space-x-4">
               {[
-                { icon: <Facebook size={18} />, href: '#' },
-                { icon: <Twitter size={18} />, href: '#' },
-                { icon: <Instagram size={18} />, href: '#' },
-                { icon: <Linkedin size={18} />, href: '#' },
+                { icon: <Facebook size={18} />, href: 'https://www.facebook.com/indiaeurasia' },
+                { icon: <Twitter size={18} />, href: 'https://x.com/indiaeurasia' },
+                { icon: <Instagram size={18} />, href: 'https://www.instagram.com/indiaeurasia' },
+                { icon: <Linkedin size={18} />, href: 'https://www.linkedin.com/company/india-eurasia-research-forum' },
               ].map((social, idx) => (
                 <a 
                   key={idx} 
@@ -46,9 +46,9 @@ export default function Footer() {
             <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-8">Navigation</h3>
             <ul className="space-y-4 text-sm text-gray-400">
               <li><Link to="/" className="hover:text-[#E87722] transition-colors flex items-center">Home</Link></li>
-              <li><Link to="/#about" className="hover:text-[#E87722] transition-colors">About Us</Link></li>
-              <li><Link to="/publications" className="hover:text-[#E87722] transition-colors">Publications</Link></li>
-              <li><Link to="/team" className="hover:text-[#E87722] transition-colors">Our Team</Link></li>
+              <li><Link to="/about" className="hover:text-[#E87722] transition-colors">About Us</Link></li>
+              <li><Link to="/research" className="hover:text-[#E87722] transition-colors">Research & Analysis</Link></li>
+              <li><Link to="/our-people" className="hover:text-[#E87722] transition-colors">Our People</Link></li>
               <li><Link to="/write-for-us" className="hover:text-[#E87722] transition-colors">Write for Us</Link></li>
             </ul>
           </div>
@@ -104,9 +104,6 @@ export default function Footer() {
                <div className="flex items-center space-x-3 grayscale hover:grayscale-0 transition-all cursor-default">
                   <img src="/ganga logo.svg" className="w-8 h-8 object-contain" />
                   <span className="text-xs font-bold uppercase tracking-wider">Volga to Ganga</span>
-               </div>
-               <div className="flex items-center space-x-2 grayscale hover:grayscale-0 transition-all cursor-default">
-                  <span className="text-xs font-serif italic font-bold">Let's Talk Eurasia</span>
                </div>
             </div>
             <div className="text-gray-500 text-xs font-medium">

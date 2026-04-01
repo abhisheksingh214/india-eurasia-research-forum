@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import About from './pages/About';
 import WriteForUs from './pages/WriteForUs';
 import Team from './pages/Team';
 import Contact from './pages/Contact';
@@ -27,11 +28,14 @@ function AnimatedRoutes() {
       >
         <Routes location={location}>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/write-for-us" element={<WriteForUs />} />
+          <Route path="/our-people" element={<Team />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/volga-to-ganga" element={<VolgaToGanga />} />
+          <Route path="/research" element={<Publications />} />
           <Route path="/publications" element={<Publications />} />
           <Route path="/publications/:id" element={<PublicationDetail />} />
         </Routes>
