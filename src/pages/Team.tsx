@@ -23,10 +23,13 @@ const leadership: Person[] = [
     bio: 'Sujal Yadav is a Senior Research Fellow with the Centre for Russian and Central Asian Studies at the School of International Studies, Jawaharlal Nehru University, New Delhi, India. He is currently pursuing a PhD at the same institution. His research interests include Russian foreign policy, cultural diplomacy, Russian literature, and cultural studies. An early career researcher specialising in contemporary Russian studies, her primary focus is on how non-traditional actors/institutions interact with traditional actors to shape global affairs.',
     linkedin: 'https://www.linkedin.com/in/sujal-yadav-235025208/',
   },
+];
+
+const technicalTeam: Person[] = [
   {
     name: 'Abhishek Singh',
     image: '/images/abhishek.jpg',
-    bio: 'Abhishek Singh is a researcher from Jawaharlal Nehru University (JNU) and co-founder of an AI startup. An Assistant Professor specialising in complex systems, his work focuses on the intersection of emerging technologies, artificial intelligence, and public diplomacy. He leads the digital architecture and strategic execution for IERF.',
+    bio: 'Abhishek Singh is a researcher from Jawaharlal Nehru University (JNU) and co-founder of an AI startup. An Assistant Professor specialising in complex systems, his work focuses on the intersection of emerging technologies, intelligence, and public diplomacy. He leads the digital architecture and strategic execution for IERF.',
     linkedin: '',
   },
 ];
@@ -53,7 +56,7 @@ const scholarlyNetwork: Person[] = [
   },
   {
     name: 'Saumya Tomar',
-    image: '/images/saumya.jpg',
+    image: '/images/Saumya.png',
     bio: 'Saumya Tomar is a Junior Research Fellow at the Centre for Russian and Central Asian Studies, School of International Studies, Jawaharlal Nehru University, New Delhi. She is a PhD candidate at the same institution. Her research interests include climate change, environmental security and environmental governance in Eurasia, with a special focus on the Arctic and Baltic Region. Her work examines how environmental transformation influences governance structures, disrupts economic activity, and shapes geopolitical dynamics in the Post-Soviet space.',
     linkedin: 'https://www.linkedin.com/in/saumya-tomar-6b2a76345/',
   },
@@ -176,6 +179,18 @@ export default function Team() {
             <h2 className="text-center text-3xl sm:text-4xl font-black text-[#1B3B5F] mb-12 tracking-tight">Research Advisor</h2>
             <div className="max-w-2xl mx-auto">
               <ProfileCard person={advisor} large />
+            </div>
+          </div>
+
+          {/* Technical Team */}
+          <div className="mb-20">
+            <h2 className="text-center text-3xl sm:text-4xl font-black text-[#1B3B5F] mb-12 tracking-tight">Technical Team</h2>
+            <div className="max-w-2xl mx-auto">
+              {technicalTeam.map((person) => (
+                <div key={person.name}>
+                  <ProfileCard person={person} large />
+                </div>
+              ))}
             </div>
           </div>
 
