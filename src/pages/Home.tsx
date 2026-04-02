@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const heroImages = [
-  '/images/pexels-aghyadnajjar-4623859.jpg',
-  '/images/pexels-mesut-yalcin-1233429888-27914446.jpg',
-  '/images/pexels-ykfotography-11066793.jpg'
+  '/images/hero1.jpg',
+  '/images/hero2.jpeg',
+  '/images/hero3.jpg'
 ];
 
 export default function Home() {
@@ -139,8 +139,8 @@ export default function Home() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#1B3B5F]/5 rounded-full blur-3xl -z-10"></div>
               <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white group">
                 <img 
-                  src="/images/pexels-arthousestudio-4328296.jpg" 
-                  alt="IERF HQ" 
+                  src="/images/welcome.avif" 
+                  alt="India-Eurasia cooperation" 
                   className="w-full h-[600px] object-cover group-hover:scale-110 transition-transform duration-[3s]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1B3B5F]/40 to-transparent"></div>
