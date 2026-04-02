@@ -20,8 +20,14 @@ const leadership: Person[] = [
   {
     name: 'Sujal Yadav',
     image: '/images/image8.jpg',
-    bio: 'Sujal Yadav is a Senior Research Fellow with the Centre for Russian and Central Asian Studies at the School of International Studies, Jawaharlal Nehru University, New Delhi, India. He is currently pursuing a PhD at the same institution. His research interests include Russian foreign policy, cultural diplomacy, Russian literature, and cultural studies. An early career researcher specialising in contemporary Russian studies, he has published in reputed academic outlets, including the Gorchakov Public Diplomacy Fund Journal, and other national and international publications. He has also worked as an official interpreter at major international events, including the SCO-RATS Forum (2022), the SCO Film Festival (2023), and the India-Russia Business Forum (2025).',
+    bio: 'Sujal Yadav is a Senior Research Fellow with the Centre for Russian and Central Asian Studies at the School of International Studies, Jawaharlal Nehru University, New Delhi, India. He is currently pursuing a PhD at the same institution. His research interests include Russian foreign policy, cultural diplomacy, Russian literature, and cultural studies. An early career researcher specialising in contemporary Russian studies, her primary focus is on how non-traditional actors/institutions interact with traditional actors to shape global affairs.',
     linkedin: 'https://www.linkedin.com/in/sujal-yadav-235025208/',
+  },
+  {
+    name: 'Abhishek Singh',
+    image: '/images/abhishek.jpg',
+    bio: 'Abhishek Singh is a researcher from Jawaharlal Nehru University (JNU) and co-founder of an AI startup. An Assistant Professor specialising in complex systems, his work focuses on the intersection of emerging technologies, artificial intelligence, and public diplomacy. He leads the digital architecture and strategic execution for IERF.',
+    linkedin: '',
   },
 ];
 
@@ -80,12 +86,6 @@ const scholarlyNetwork: Person[] = [
     image: '/images/image12.jpg',
     bio: 'Harshal Raj Patel completed his undergraduate studies in Philosophy at Hansraj College, University of Delhi. His final-year dissertation examined meritocracy and the concept of justice. His research interests include society, diplomatic history, and South Asian affairs. Alongside his academic pursuits, he has worked as a consultant at a New Delhi-based political consultancy. He is also a freelance columnist and contributes regularly to The Tribune, covering nationalism, geopolitics, and diplomatic history.',
     linkedin: 'https://www.linkedin.com/in/harshal-raj-patel-b81682259/',
-  },
-  {
-    name: 'Abhishek Singh',
-    image: '/images/abhishek.jpg',
-    bio: 'Contributing to the research and operational goals of the India Eurasia Research Forum.',
-    linkedin: '',
   },
 ];
 
