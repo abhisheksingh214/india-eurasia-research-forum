@@ -57,4 +57,26 @@ h2 {
     padding: 0.5rem 1.5rem;
     box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1);
   }
+
+  .hover-gold-glow {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .hover-gold-glow:hover {
+    box-shadow: 0 0 25px rgba(232, 119, 34, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .hover-gold-text:hover {
+    color: #E87722 !important;
+  }
+
+  .hover-gold-border:hover {
+    border-color: #E87722 !important;
+  }
 }
+
+/* Hide Google Translate Banner and Popups completely */
+.goog-te-banner-frame.skiptranslate { display: none !important; }
+body { top: 0px !important; }
+#goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+.goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }

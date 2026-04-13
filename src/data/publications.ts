@@ -11,63 +11,54 @@ export interface Publication {
 
 export const publications: Publication[] = [
   {
-    id: 'instability-central-asia',
-    title: 'Instability in Central Asia: Implications for India',
-    type: 'Policy Briefs',
-    date: 'March 2026',
-    author: 'Dr. Pravesh Kumar Gupta',
-    description: 'An in-depth analysis of recent geopolitical shifts in the Central Asian region and how they impact India\'s strategic interests and energy security.',
-    image: '/images/istockphoto-171116980-1024x1024.jpg',
+    id: 'strategic-calculus-eurasia',
+    title: "Eurasia in India's Strategic Calculus",
+    type: 'Special Research Note',
+    date: '31 March, 2026',
+    author: 'Dr. Pravesh Gupta',
+    description: "IERF serves as a vital enabler in a rapidly transforming Eurasia, driving evidence-based continental re-engagement to help India build enduring strategic depth.",
+    image: '/images/publications/rashtrapati-bhawan.jpg',
     content: `
-      <p>The geopolitical landscape of Central Asia is undergoing a period of significant transformation, driven by both internal shifts and external pressures. As the region navigates these changes, the implications for India's strategic interests, particularly in energy security and regional connectivity, are profound.</p>
+      <p>In a rapidly transforming Eurasia, marked by multi-vector foreign policies and connectivity realignments, IERF will serve as a vital enabler. By driving evidence-based continental re-engagement, it will help India build enduring strategic depth that complements its continental priorities, safeguarding national interests through sovereignty-respecting cooperation and shared prosperity.</p>
       
-      <h3>Geopolitical Shifts</h3>
-      <p>Recent developments have highlighted the fragility of existing stability frameworks. Power transitions, economic fluctuations, and evolving security alliances are reshaping the traditional influence of regional and global powers. For India, these shifts present both challenges and opportunities to deepen its engagement through initiatives like the International North-South Transport Corridor (INSTC).</p>
+      <h3>Connectivity Realignments</h3>
+      <p>The shifting strategic landscape requires a nuanced understanding of regional dynamics. India's engagement with Eurasia is not just about trade, but about building long-term partnerships that respect sovereignty and promote shared growth.</p>
       
-      <h3>Strategic Interests for India</h3>
-      <p>India's 'Connect Central Asia' policy reflects the multi-dimensional nature of its interests. Beyond energy, the region serves as a critical partner in counter-terrorism and maritime security. Maintaining stability in Central Asia is essential for preventing the spillover of extremist ideologies and ensuring safe transit for trade.</p>
-      
-      <p>At IERF, we believe that India must adopt a proactive and nuanced approach, focusing on people-to-people connections and development partnerships that go beyond mere geopolitical calculations.</p>
+      <p>Dr. Pravesh Kumar Gupta is an Associate Fellow at the Vivekananda International Foundation (VIF). He is also the Research Advisor to the India Eurasia Research Forum (IERF). Dr. Gupta is an expert on Eurasian geopolitics and his research focuses on the society and politics of Central Asia, energy security and sustainability, and trans-regional connectivity linkages between Central and South Asia.</p>
     `
   },
   {
-    id: 'brics-expansion-future',
-    title: 'The Future of the BRICS Expansion',
-    type: 'Reports',
-    date: 'February 2026',
+    id: 'chabahar-strategic-stakes',
+    title: "In the Shadow of Conflicts: India’s Strategic Stakes in Chabahar Port",
+    type: 'Perspectives',
+    date: 'April 2026',
     author: 'Rahul Gupta',
-    description: 'Examining the inclusion of new member states and what it means for the Global South\'s economic trajectory.',
-    image: '/images/pexels-aghyadnajjar-4623859.jpg',
+    description: "As regional tensions escalate, India's operational role in Chabahar faces new complexities. Maintaining this strategic gateway is essential for India's long-term Eurasian presence.",
+    image: '/images/publications/chabahar-stakes.jpg',
     content: `
-      <p>The recent expansion of BRICS marks a pivotal moment in the evolution of global governance. By including new member states from across the Global South, the bloc is positioning itself as a more representative and influential voice on the world stage.</p>
+      <p>On a bilateral level, India’s already strained trade ties with Iran comes in the backdrop of the rapidly evolving situation in West Asia. As the US-Israeli attack on Iran unfolds, reports suggest aerial damage around the port city of Chabahar, even though there is no damage reported at the India operated Shahid Beheshti terminal. However, the Israeli-US strikes on Iran’s critical infrastructure will complicate India’s limited operational role in the port, and discourage private investment in the future.</p>
       
-      <h3>Economic Rebalancing</h3>
-      <p>The addition of resource-rich and strategically located nations significantly enhances BRICS' collective economic weight. This rebalancing has the potential to challenge established global financial structures and promote alternative trade and settlement mechanisms, such as the use of local currencies.</p>
+      <h3>Geopolitical Implications</h3>
+      <p>In a region which India considers its extended neighbourhood, stepping down from Chabahar without an alternative will undermine India’s already limited engagement with Central Asia. On the other hand, it will strengthen Pakistan’s credibility to the Central Asian republics for accessing the Indian ocean through Chinese-led BRI infrastructure. In the wider region, ceding space to China and Pakistan will erode India’s long-term presence in Eurasia.</p>
       
-      <h3>Internal Dynamics & Challenges</h3>
-      <p>However, expansion also brings challenges of coordination and consensus-building. Diverse political systems and varying economic priorities among the new members will require a strong institutional framework to maintain cohesion and achieve shared goals.</p>
-      
-      <p>For India, the expanded BRICS provides a platform to champion the interests of the Global South while balancing its relationships with both Eastern and Western powers.</p>
+      <p>Rahul Gupta is the Founder Director of India Eurasia Research Forum (IERF) and a Senior Research Fellow at JNU, New Delhi. His work focuses on regional connectivity and strategic partnerships in the Eurasian landmass.</p>
     `
   },
   {
-    id: 'soft-power-cultural-diplomacy',
-    title: 'Soft Power & Cultural Diplomacy in Eurasia',
-    type: 'Articles',
-    date: 'January 2026',
-    author: 'Sujal Yadav',
-    description: 'A study on how educational exchange programs and cultural exports are reshaping regional trust and bilateral relations.',
-    image: '/images/pexels-mesut-yalcin-1233429888-27914446.jpg',
+    id: 'nur-sultan-futuristic-heart',
+    title: 'Nur-Sultan: The Futuristic Heart of Central Asia',
+    type: 'Stories from Eurasia',
+    date: 'March 2026',
+    author: 'Nurbolat Toktamys',
+    description: "A vivid journey through Kazakhstan's capital, where ancient traditions coexist with technological innovation and ambitious global development.",
+    image: '/images/publications/nur-sultan-1.jpg',
     content: `
-      <p>In the complex arena of Eurasian geopolitics, soft power and cultural diplomacy are emerging as vital tools for building trust and long-term partnerships. Beyond hard power dynamics, the exchange of ideas, education, and artistic expression plays a crucial role in shaping perceptions and fostering regional stability.</p>
+      <p>From the moment I arrived, India left a strong impression on me. The scale, diversity, and energy of the country was remarkable. Cities moved at an intense rhythm, yet there was also a sense of openness and curiosity among the people I met. India felt both ancient and modern at the same time – a place where centuries-old traditions coexist with technological innovation and ambitious economic development.</p>
       
-      <h3>The Role of Education</h3>
-      <p>Educational exchange programs, such as student scholarships and research collaborations, create a network of future leaders who possess a deep understanding and appreciation of each other's cultures. These 'bridges of knowledge' are essential for overcoming historical prejudices and building a shared future.</p>
+      <h3>The Bridge of Civilizations</h3>
+      <p>Nur-Sultan serves as a literal and figurative bridge between Europe and Asia. Its architecture reflects this dual identity, standing as a testament to the country's vision for the future while remaining grounded in the rich cultural fabric of the Kazakh people.</p>
       
-      <h3>Cultural Exports</h3>
-      <p>From cinema and music to literature and art, cultural exports provide a window into the values and aspirations of a society. Promoting these exports across Eurasia helps build a positive image and creates a sense of collective identity among diverse populations.</p>
-      
-      <p>IERF's 'Volga to Ganga Dialogue' is a testament to the power of cultural diplomacy in connecting the ancient civilizations of India and Eurasia through reflective conversations that transcend politics.</p>
+      <p>Nurbolat Toktamys is a cultural observer and scholar exploring the intersections of identity, urban landscape, and regional diplomacy in Eurasia.</p>
     `
   },
   {

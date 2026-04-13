@@ -1,13 +1,16 @@
 import { motion } from 'motion/react';
 import { Calendar, Quote, ArrowRight } from 'lucide-react';
 import SubHero from '../components/SubHero';
+import { useContent } from '../context/ContentContext';
 
 export default function VolgaToGanga() {
+  const { content } = useContent();
+  const c = content.volgaToGanga;
   return (
     <div className="flex flex-col min-h-screen bg-[#F8FAFC]">
       <SubHero 
         title="Volga to Ganga" 
-        subtitle="Exploring the civilisational, cultural and intellectual linkages between India and the wider Eurasian region."
+        subtitle={c.subtitle}
         breadcrumb={[{ label: 'Events', href: '/events' }, { label: 'Volga to Ganga' }]}
       />
 
@@ -30,34 +33,31 @@ export default function VolgaToGanga() {
                className="flex justify-center mb-16"
             >
               <div className="h-64 flex items-center justify-center">
-                <img src="/ganga logo.svg" alt="Volga to Ganga Logo" className="h-full object-contain" />
+                <img src="/ganga-logo.svg" alt="Volga to Ganga Logo" className="h-full object-contain" />
               </div>
             </motion.div>
             
             <div className="relative mb-16">
                <Quote className="absolute -top-10 -left-6 text-gray-100 w-24 h-24 -z-10" />
                <p className="text-[#1B3B5F] text-xl md:text-2xl leading-relaxed italic font-medium">
-                "The Volga to Ganga Dialogues is India Eurasia Research Forum’s flagship platform dedicated to exploring the civilisational, cultural and intellectual linkages between India and the wider Eurasian region."
+                {c.mainQuote}
                </p>
             </div>
 
             <div className="text-left space-y-8 text-gray-500 font-medium leading-[2] text-lg max-w-3xl mx-auto mb-20">
-              <p>
-                Drawing inspiration from the deep historical linkages and intellectual traditions that have connected societies across the Eurasian landmass, the dialogue series brings together scholars, diplomats, artists and practitioners to engage in reflective conversations that transcend geopolitics.
-              </p>
-              <p>
-                The dialogue series seeks to foster mutual understanding, people-to-people connections, and a shared appreciation of the enduring ties between the regions falling between the Volga and the Ganga river basins.
-              </p>
+              {c.paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
             </div>
 
             <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className="inline-flex flex-col items-center bg-[#1B3B5F] text-white p-12 rounded-[3rem] shadow-2xl shadow-[#1B3B5F]/30 border-b-8 border-[#E87722]"
+              whileHover={{ scale: 1.02, borderColor: '#E87722', boxShadow: '0 0 35px rgba(232,119,34,0.4)' }}
+              className="inline-flex flex-col items-center bg-[#1B3B5F] text-white p-12 rounded-[3rem] shadow-2xl shadow-[#1B3B5F]/30 border-b-8 border-white/20 transition-all"
             >
-              <h3 className="text-[#E87722] text-xs font-black uppercase tracking-[0.4em] mb-4">Phase: Initiative Launch</h3>
-              <h4 className="text-3xl font-black mb-6 tracking-tight">Coming Soon</h4>
+              <h3 className="text-[#E87722] text-xs font-black uppercase tracking-[0.4em] mb-4">{c.ctaPhase}</h3>
+              <h4 className="text-3xl font-black mb-6 tracking-tight">{c.ctaHeading}</h4>
               <p className="text-white/60 text-sm max-w-sm mx-auto mb-8 font-bold uppercase tracking-widest leading-relaxed">
-                Stay tuned for updates on our upcoming hybrid and physical dialogue series.
+                {c.ctaBody}
               </p>
               <div className="h-10 w-px bg-white/20 mb-8"></div>
               <a href="/contact" className="flex items-center text-xs font-black uppercase tracking-widest hover:text-[#E87722] transition-colors group">

@@ -6,3 +6,22 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Temporary Scripts & Logs
+*.sh
+*.exp
+*.py
+build_log*.txt
+*.DOCX
+temp_*
+scratch_*
+chabahar_clean.ts
+correct_pub.ts
+test.py
+test_glob.js
+
+# Data backups
+*.json_bak
+IERF_Content/
+src/*.json
+!src/data/siteContent.ts

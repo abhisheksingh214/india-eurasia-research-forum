@@ -1,37 +1,11 @@
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { useContent } from '../context/ContentContext';
 
 export default function Events() {
-  const events = [
-    {
-      title: 'Volga to Ganga Dialogues',
-      date: 'Ongoing Platform',
-      type: 'Flagship Series',
-      location: 'New Delhi / Virtual',
-      description: 'The Volga to Ganga Dialogues is India Eurasia Research Forum’s flagship platform dedicated to exploring the civilisational, cultural and intellectual linkages between India and the wider Eurasian region.',
-      link: '/events/volga-to-ganga',
-      featured: true
-    },
-    {
-      title: 'India-Central Asia Relations: The Road Ahead',
-      date: 'May 15, 2026',
-      type: 'Webinar',
-      location: 'Virtual',
-      description: 'An expert panel discussing the future of strategic and economic partnerships between India and the Central Asian Republics.',
-      link: '#',
-      featured: false
-    },
-    {
-      title: 'Connectivity Corridors in Eurasia',
-      date: 'June 02, 2026',
-      type: 'Roundtable',
-      location: 'New Delhi',
-      description: 'A focused discussion on the evolving logistics networks and their implications for trans-regional trade.',
-      link: '#',
-      featured: false
-    }
-  ];
+  const { content } = useContent();
+  const events = content.events.items;
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F4F6F8]">
@@ -57,7 +31,7 @@ export default function Events() {
             transition={{ delay: 0.2 }}
             className="text-xl text-gray-300 max-w-2xl mx-auto font-light"
           >
-            Join our expert-led discussions, seminars, and our flagship dialogue series bridging India and Eurasia.
+            {content.events.subtitle}
           </motion.p>
         </div>
       </section>
@@ -73,11 +47,11 @@ export default function Events() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className={`bg-white rounded-2xl p-8 border ${event.featured ? 'border-[#E87722] shadow-lg relative overflow-hidden' : 'border-gray-100 shadow-sm'} hover:shadow-xl transition-all flex flex-col h-full group`}
+                className={`bg-white rounded-2xl p-8 border ${event.featured ? 'border-[#E87722] shadow-[0_0_25px_rgba(232,119,34,0.15)] relative overflow-hidden' : 'border-gray-100 shadow-sm'} hover:shadow-xl hover:shadow-[#E87722]/10 hover:border-[#E87722]/30 transition-all flex flex-col h-full group`}
               >
                 {event.featured && (
-                  <div className="absolute top-0 right-0 bg-[#E87722] text-white text-xs font-bold px-4 py-1 rounded-bl-lg uppercase tracking-wider">
-                    Flagship
+                  <div className="absolute top-0 right-0 bg-[#E87722] text-white text-[9px] font-black px-4 py-1 rounded-bl-lg uppercase tracking-wider shadow-lg">
+                    Flagship Series
                   </div>
                 )}
                 
@@ -101,10 +75,9 @@ export default function Events() {
                 
                 <Link 
                   to={event.link} 
-                  onClick={event.link === '#' ? (e) => e.preventDefault() : undefined}
-                  className="inline-flex items-center font-bold text-[#1B3B5F] hover:text-[#E87722] transition-colors mt-auto"
+                  className="inline-flex items-center font-black text-sm uppercase tracking-widest text-[#1B3B5F] hover:text-[#E87722] transition-colors mt-auto group/link"
                 >
-                  {event.featured ? 'Explore Platform' : 'View Details'} <ArrowRight size={18} className="ml-2" />
+                  {event.featured ? 'Explore Platform' : 'View Details'} <ArrowRight size={18} className="ml-2 group-hover/link:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
             ))}
