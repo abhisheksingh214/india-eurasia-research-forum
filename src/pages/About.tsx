@@ -71,14 +71,14 @@ export default function About() {
           </div>
         </motion.section>
 
-        {/* Our Vision */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="bg-gradient-to-br from-[#1B3B5F] to-[#0A192F] rounded-2xl sm:rounded-[2.5rem] shadow-xl p-6 sm:p-10 lg:p-14 mb-12 text-white relative overflow-hidden"
         >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#E87722] opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1B3B5F]/60 via-[#1B3B5F]/0 to-[#1B3B5F]/80 z-10"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#E87722]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
           <h2 className="text-2xl sm:text-3xl font-black mb-6 tracking-tight relative z-10">Our Vision</h2>
           {c.visionParagraphs.map((p, i) => (
             <p key={i} className={`text-white/80 text-base sm:text-lg leading-relaxed relative z-10 ${i < c.visionParagraphs.length - 1 ? 'mb-6' : ''}`}>

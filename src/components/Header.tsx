@@ -49,18 +49,26 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isLight = isHomePage && !scrolled;
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 pointer-events-none flex justify-center pt-2 md:pt-4 transition-all duration-300">
       <motion.div
         animate={{
-          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.98)' : 'transparent',
+          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0)',
           backdropFilter: scrolled ? 'blur(16px)' : 'blur(0px)',
           boxShadow: scrolled
             ? '0 10px 40px -10px rgba(27,59,95,0.2), 0 0 0 1px rgba(0,0,0,0.03)'
             : '0 0px 0px rgba(0,0,0,0)',
           borderRadius: scrolled ? '9999px' : '0px',
+          border: scrolled ? '1px solid rgba(0,0,0,0.05)' : '1px solid rgba(255,255,255,0)',
         }}
-        transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+        transition={{ 
+          type: 'spring', 
+          stiffness: 260, 
+          damping: 20,
+          mass: 1 
+        }}
         className="pointer-events-auto relative flex items-center justify-between w-[95%] max-w-[1280px] h-14 md:h-16 px-2 md:px-3"
       >
         {/* ── Logo & Wordmark ── */}
@@ -68,15 +76,17 @@ export default function Header() {
           <Link to="/" className="flex items-center gap-2 md:gap-3 group">
             <div className={`relative flex-shrink-0 transition-all duration-500 ${scrolled ? 'w-10 h-10 md:w-12 md:h-12' : 'w-12 h-12 md:w-14 md:h-14'}`}>
               <img
-                src="/logo.webp"
+                src="/logo_opt.webp"
                 alt="IERF"
-                className={`w-full h-full object-contain transition-all duration-500 ${scrolled ? 'drop-shadow-sm' : 'drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]'}`}
+                className={`w-full h-full object-contain transition-all duration-500 ${scrolled ? 'drop-shadow-sm' : 'drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]'} ${isLight ? 'brightness-0 invert' : ''}`}
               />
             </div>
 
             <span
-              className={`hidden xl:block font-black tracking-[0.08em] transition-all duration-300 whitespace-nowrap text-[#1B3B5F] ${
-                scrolled ? 'text-[10px] md:text-[12px]' : 'text-[11px] md:text-[13px]'
+              className={`hidden sm:block font-black tracking-[0.08em] transition-all duration-300 whitespace-nowrap ${
+                isLight ? 'text-white' : 'text-[#1B3B5F]'
+              } ${
+                scrolled ? 'text-[8px] md:text-[12px]' : 'text-[9px] md:text-[13px]'
               }`}
               style={{ fontFamily: '"Outfit", sans-serif' }}
             >
@@ -90,7 +100,7 @@ export default function Header() {
           {/* Nav pill */}
           <motion.nav
             animate={{
-              backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
+              backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'rgba(255, 255, 255, 0)',
               backdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
               boxShadow: scrolled
                 ? '0 4px 20px rgba(0,0,0,0.08)'
@@ -99,8 +109,8 @@ export default function Header() {
             transition={{ type: 'spring', stiffness: 400, damping: 35 }}
             className="flex items-center gap-1 px-2 py-1.5 rounded-full"
           >
-            <NavLink to="/" label="Home" scrolled={scrolled} />
-            <NavLink to="/about" label="About Us" scrolled={scrolled} />
+            <NavLink to="/" label="Home" scrolled={scrolled} isLight={isLight} />
+            <NavLink to="/about" label="About Us" scrolled={scrolled} isLight={isLight} />
 
             {/* Events dropdown */}
             <div
@@ -108,7 +118,9 @@ export default function Header() {
               onMouseEnter={() => setIsEventsOpen(true)}
               onMouseLeave={() => setIsEventsOpen(false)}
             >
-              <button className={`flex items-center whitespace-nowrap gap-1 px-3 py-2 rounded-full text-[13px] font-semibold transition-all duration-200 text-[#1B3B5F] hover:bg-[#E87722]/10 hover:text-[#E87722]`}>
+              <button className={`flex items-center whitespace-nowrap gap-1 px-3 py-2 rounded-full text-[13px] font-semibold transition-all duration-200 ${
+                isLight ? 'text-white' : 'text-[#1B3B5F]'
+              } hover:bg-[#E87722]/10 hover:text-[#E87722]`}>
                 Events <ChevronDown size={13} className={`transition-transform duration-300 ${isEventsOpen ? 'rotate-180' : ''}`} />
               </button>
               <AnimatePresence>
@@ -141,7 +153,9 @@ export default function Header() {
               onMouseEnter={() => setIsResearchOpen(true)}
               onMouseLeave={() => setIsResearchOpen(false)}
             >
-              <button className={`flex items-center whitespace-nowrap gap-1 px-3 py-2 rounded-full text-[13px] font-semibold transition-all duration-200 text-[#1B3B5F] hover:bg-[#E87722]/10 hover:text-[#E87722]`}>
+              <button className={`flex items-center whitespace-nowrap gap-1 px-3 py-2 rounded-full text-[13px] font-semibold transition-all duration-200 ${
+                isLight ? 'text-white' : 'text-[#1B3B5F]'
+              } hover:bg-[#E87722]/10 hover:text-[#E87722]`}>
                 Research & Analysis <ChevronDown size={13} className={`transition-transform duration-300 ${isResearchOpen ? 'rotate-180' : ''}`} />
               </button>
               <AnimatePresence>
@@ -168,7 +182,7 @@ export default function Header() {
               </AnimatePresence>
             </div>
 
-            <NavLink to="/our-people" label="Our People" scrolled={scrolled} />
+            <NavLink to="/our-people" label="Our People" scrolled={scrolled} isLight={isLight} />
           </motion.nav>
         </div>
 
@@ -177,7 +191,7 @@ export default function Header() {
           {/* Language Switcher Pill */}
           <motion.div
             animate={{
-              backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
+              backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'rgba(255, 255, 255, 0)',
               backdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
               boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.08)' : 'none',
             }}
@@ -189,9 +203,9 @@ export default function Header() {
                 key={l}
                 onClick={() => switchLanguage(l)}
                 className={`px-2.5 py-1 rounded-full text-[10px] font-black transition-all ${lang === l
-                    ? 'bg-white text-[#1B3B5F] shadow-sm'
-                    : 'text-[#1B3B5F]/60 hover:text-[#1B3B5F]'
-                  }`}
+                  ? 'bg-white text-[#1B3B5F] shadow-sm'
+                  : `${isLight ? 'text-white/60 hover:text-white' : 'text-[#1B3B5F]/60 hover:text-[#1B3B5F]'}`
+                } text-[10px] font-black transition-all`}
               >
                 {l}
               </button>
@@ -201,7 +215,7 @@ export default function Header() {
           {/* Action Buttons Pill */}
           <motion.div
             animate={{
-              backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
+              backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'rgba(255, 255, 255, 0)',
               backdropFilter: scrolled ? 'blur(12px)' : 'blur(0px)',
               boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.08)' : 'none',
             }}
@@ -210,12 +224,15 @@ export default function Header() {
           >
             <Link
               to="/write-for-us"
-              className={`text-sm font-semibold transition-all text-[#1B3B5F] hover:text-[#E87722]`}
+              className={`text-sm font-semibold transition-all ${
+                isLight ? 'text-white hover:text-[#E87722]' : 'text-[#1B3B5F] hover:text-[#E87722]'
+              }`}
             >
               Write for Us
             </Link>
             <Link
               to="/contact"
+              aria-label="Navigate to contact page"
               className={`px-5 py-2 rounded-full text-[13px] font-bold transition-all shadow-sm ${scrolled
                   ? 'bg-[#E87722] text-white hover:bg-orange-600 hover:shadow-[0_0_15px_rgba(232,119,34,0.4)]'
                   : 'bg-white text-[#1B3B5F] hover:bg-gray-100 hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] border border-gray-100'
@@ -228,6 +245,7 @@ export default function Header() {
           {/* Mobile menu toggle */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             className={`p-2 rounded-full lg:hidden block transition-all text-[#1B3B5F] bg-gray-100/80 hover:bg-gray-200/80`}
           >
             {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -270,38 +288,78 @@ export default function Header() {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-6 space-y-1">
-                {[
-                  { label: 'Home', to: '/', icon: <Globe size={18} /> },
-                  { label: 'About Us', to: '/about', icon: <BookOpen size={18} /> },
-                  { label: 'Research & Analysis', to: '/research', icon: <PenLine size={18} /> },
-                  { label: 'Our People', to: '/our-people', icon: <Users size={18} /> },
-                  { label: 'Events', to: '/events', icon: <CalendarDays size={18} /> },
-                  { label: 'DigiEurasia', to: '/digieurasia', icon: <Camera size={18} /> },
-                  { label: 'Write for Us', to: '/write-for-us', icon: <Send size={18} /> },
-                  { label: 'Contact', to: '/contact', icon: <Mail size={18} /> },
-                ].map(link => (
-                  <Link
-                    key={link.label}
-                    to={link.to}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center gap-4 px-4 py-3.5 rounded-xl text-[#1B3B5F] font-bold text-sm hover:bg-gray-50 transition-all group"
-                  >
-                    <span className="text-gray-300 group-hover:text-[#E87722]">{link.icon}</span>
-                    {link.label}
-                  </Link>
-                ))}
+              <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
+                <div className="space-y-6">
+                  {/* Language Selector in Mobile Menu */}
+                  <div className="bg-gray-50 rounded-2xl p-4 flex flex-col gap-3">
+                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest pl-1">Select Language</span>
+                    <div className="flex items-center gap-2">
+                      {(['EN', 'HI', 'RU'] as const).map((l) => (
+                        <button
+                          key={l}
+                          onClick={() => switchLanguage(l)}
+                          className={`flex-1 py-3 rounded-xl text-xs font-black transition-all ${lang === l
+                            ? 'bg-[#1B3B5F] text-white shadow-lg shadow-[#1B3B5F]/20'
+                            : 'bg-white text-[#1B3B5F] border border-gray-100 hover:border-[#1B3B5F]/30'
+                          }`}
+                        >
+                          {l === 'EN' ? 'English' : l === 'HI' ? 'हिन्दी' : 'Русский'}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <MobileNavLink to="/" label="Home" icon={<Globe size={18} />} onClick={() => setIsMenuOpen(false)} />
+                    <MobileNavLink to="/about" label="About Us" icon={<BookOpen size={18} />} onClick={() => setIsMenuOpen(false)} />
+                    
+                    {/* Nested Research */}
+                    <div className="pt-2 pb-1">
+                      <div className="flex items-center gap-4 px-4 py-2 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Research</div>
+                      <MobileNavLink to="/research" label="Publications" icon={<PenLine size={18} />} onClick={() => setIsMenuOpen(false)} />
+                      <MobileNavLink to="/digieurasia" label="DigiEurasia" icon={<Camera size={18} />} onClick={() => setIsMenuOpen(false)} />
+                    </div>
+
+                    {/* Nested Events */}
+                    <div className="pt-2 pb-1">
+                      <div className="flex items-center gap-4 px-4 py-2 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Initiatives</div>
+                      <MobileNavLink to="/events/volga-to-ganga" label="Volga to Ganga" icon={<CalendarDays size={18} />} onClick={() => setIsMenuOpen(false)} />
+                      <MobileNavLink to="/events/ierf-talks" label="IERF Talks" icon={<MessageSquare size={18} />} onClick={() => setIsMenuOpen(false)} />
+                    </div>
+
+                    <MobileNavLink to="/our-people" label="Our People" icon={<Users size={18} />} onClick={() => setIsMenuOpen(false)} />
+                  </div>
+                </div>
               </div>
 
-              <div className="p-8 border-t border-gray-50 bg-gray-50/50">
-                <div className="flex justify-center gap-6 mb-4">
-                  <Facebook size={18} className="text-gray-400 hover:text-[#1B3B5F] transition-colors" />
-                  <Twitter size={18} className="text-gray-400 hover:text-[#1B3B5F] transition-colors" />
-                  <Instagram size={18} className="text-gray-400 hover:text-[#1B3B5F] transition-colors" />
+              <div className="p-6 border-t border-gray-50 bg-gray-50/50 space-y-6">
+                <div className="grid grid-cols-2 gap-3">
+                  <Link
+                    to="/write-for-us"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center justify-center py-4 rounded-2xl bg-white border border-gray-100 text-[#1B3B5F] font-bold text-xs hover:border-[#1B3B5F]/30 transition-all"
+                  >
+                    Write for Us
+                  </Link>
+                  <Link
+                    to="/contact"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center justify-center py-4 rounded-2xl bg-[#E87722] text-white font-bold text-xs shadow-lg shadow-orange-500/20 hover:scale-[1.02] active:scale-95 transition-all"
+                  >
+                    Contact Us
+                  </Link>
                 </div>
-                <p className="text-[10px] text-gray-400 text-center font-bold uppercase tracking-widest leading-relaxed">
-                  IERF • © 2026<br />All Rights Reserved
-                </p>
+
+                <div className="space-y-4">
+                  <div className="flex justify-center gap-6">
+                    <Facebook size={20} className="text-gray-400 hover:text-[#1B3B5F] transition-colors" />
+                    <Twitter size={20} className="text-gray-400 hover:text-[#1B3B5F] transition-colors" />
+                    <Instagram size={20} className="text-gray-400 hover:text-[#1B3B5F] transition-colors" />
+                  </div>
+                  <p className="text-[10px] text-gray-400 text-center font-bold uppercase tracking-widest leading-relaxed">
+                    IERF • © 2026<br />All Rights Reserved
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -311,11 +369,26 @@ export default function Header() {
   );
 }
 
-function NavLink({ to, label, scrolled }: { to: string; label: string; scrolled: boolean }) {
+function MobileNavLink({ to, label, icon, onClick }: { to: string; label: string; icon: React.ReactNode; onClick: () => void }) {
   return (
     <Link
       to={to}
-      className={`px-3 py-2 rounded-full text-[13px] font-semibold whitespace-nowrap transition-all duration-200 text-[#1B3B5F] hover:text-[#E87722] hover:bg-[#E87722]/5`}
+      onClick={onClick}
+      className="flex items-center gap-4 px-4 py-3.5 rounded-xl text-[#1B3B5F] font-bold text-sm hover:bg-gray-100/50 transition-all group"
+    >
+      <span className="text-gray-300 group-hover:text-[#E87722] transition-colors">{icon}</span>
+      {label}
+    </Link>
+  );
+}
+
+function NavLink({ to, label, scrolled, isLight }: { to: string; label: string; scrolled: boolean; isLight: boolean }) {
+  return (
+    <Link
+      to={to}
+      className={`px-3 py-2 rounded-full text-[13px] font-semibold whitespace-nowrap transition-all duration-200 ${
+        isLight ? 'text-white' : 'text-[#1B3B5F]'
+      } hover:text-[#E87722] hover:bg-[#E87722]/5`}
     >
       {label}
     </Link>

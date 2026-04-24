@@ -5,7 +5,7 @@ import { useContent } from '../context/ContentContext';
 
 export default function WriteForUs() {
   const { content } = useContent();
-  const c = content.writeForUs;
+  const c = content?.writeForUs || ({} as any);
 
   const categoryIcons = [<BookOpen size={32} />, <FileText size={32} />, <Globe2 size={32} />];
   const categoryColors = ['bg-blue-500', 'bg-[#E87722]', 'bg-purple-500'];

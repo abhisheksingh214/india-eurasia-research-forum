@@ -12,7 +12,7 @@ export default function SubHero({ title, subtitle, breadcrumb }: SubHeroProps) {
   return (
     <section className="relative pt-64 pb-24 bg-[#1B3B5F] overflow-hidden">
       {/* Premium Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/pexels-ykfotography-11066793.jpg')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/yk_opt.webp')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-[#1B3B5F]/80 via-[#1B3B5F] to-[#1B3B5F]"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#E87722] opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
 

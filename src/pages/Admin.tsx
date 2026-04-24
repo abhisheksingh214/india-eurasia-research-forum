@@ -39,6 +39,11 @@ const RichTextField: React.FC<{ label: string; value: string; onChange: (v: stri
     const file = e.target.files?.[0];
     if (!file) return;
 
+    if (import.meta.env.PROD) {
+      alert('Note: Image upload is only available in the local development environment. For the live site, please upload images to the repository and reference them by their path.');
+      return;
+    }
+
     setIsUploading(true);
     try {
       const response = await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}`, {
@@ -392,6 +397,8 @@ export default function Admin() {
 
   useEffect(() => { setDraft(content); }, [content]);
 
+  const isProduction = import.meta.env.PROD;
+
   const handleLogin = () => {
     if (password === ADMIN_PASSWORD) {
       setAuthenticated(true);
@@ -403,6 +410,10 @@ export default function Admin() {
 
   const handleSave = async () => {
     updateContent(draft);
+    if (isProduction) {
+      alert('Note: Automatic save is disabled in the online version. Please use the "Export" button below to download your changes and update the siteContent.ts manually.');
+      return;
+    }
     try {
       const resp = await fetch('/api/save_content', {
         method: 'POST',
@@ -476,8 +487,14 @@ export default function Admin() {
 
   // ─── Helper to update nested draft ─────────────────────────────────────────
 
-  const updateDraft = <K extends keyof SiteContent>(section: K, updates: Partial<SiteContent[K]>) => {
-    setDraft(prev => ({ ...prev, [section]: { ...prev[section] as any, ...updates } }));
+  const updateDraft = <K extends keyof SiteContent>(section: K, updates: any) => {
+    setDraft(prev => {
+      const current = prev[section];
+      if (Array.isArray(current)) {
+        return { ...prev, [section]: updates };
+      }
+      return { ...prev, [section]: { ...current as any, ...updates } };
+    });
   };
 
   // ─── Tab Renderers ─────────────────────────────────────────────────────────
@@ -912,6 +929,17 @@ export default function Admin() {
             </button>
           </div>
         </div>
+
+        {isProduction && (
+          <div className="bg-[#E87722]/10 border-b border-[#E87722]/20 px-8 py-3">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-[#E87722] rounded-full animate-pulse" />
+              <p className="text-[#E87722] text-[11px] font-black uppercase tracking-widest">
+                Production Mode: Save & Upload are local-only. Use "Export" to preserve changes.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Content */}
         <div className="p-8 max-w-4xl">

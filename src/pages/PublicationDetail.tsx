@@ -1,12 +1,37 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'motion/react';
-import { Calendar, User, ArrowLeft, Download, Share2, Printer } from 'lucide-react';
+import { motion, useScroll, useSpring } from 'motion/react';
+import { Calendar, User, ArrowLeft, Download, Share2, Printer, Clock } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
+import { defaultContent } from '../data/siteContent';
 
 export default function PublicationDetail() {
   const { content } = useContent();
   const { id } = useParams<{ id: string }>();
+  const [readingTime, setReadingTime] = useState(0);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+  
+  // Get publication from current state
   const publication = content.publications.find(p => p.id === id);
+  
+  // Robust data fallback
+  const defaultPub = defaultContent.publications.find(p => p.id === id);
+  const bio = publication?.authorBio || defaultPub?.authorBio;
+  const authorImg = publication?.authorImage || defaultPub?.authorImage;
+
+  useEffect(() => {
+    if (publication?.content) {
+      const words = publication.content.replace(/<[^>]*>?/gm, '').split(/\s+/).length;
+      const time = Math.ceil(words / 200); // Average 200 wpm
+      setReadingTime(time);
+    }
+  }, [publication]);
 
   if (!publication) {
     return (
@@ -23,8 +48,14 @@ export default function PublicationDetail() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F4F6F8]">
+      {/* Reading Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1.5 bg-[#E87722] z-[100] origin-left"
+        style={{ scaleX }}
+      />
+
       {/* Detail Header */}
-      <section className="bg-[#1B3B5F] pt-28 pb-16 text-white relative overflow-hidden">
+      <section className="bg-[#1B3B5F] pt-20 md:pt-28 pb-10 md:pb-16 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-50">
           <motion.div
@@ -42,10 +73,15 @@ export default function PublicationDetail() {
             animate={{ opacity: 1, y: 0 }}
             className="drop-shadow-2xl"
           >
-            <span className="inline-block bg-[#E87722] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg mb-4">
-              {publication.type}
-            </span>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white drop-shadow-2xl">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="inline-block bg-[#E87722] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+                {publication.type}
+              </span>
+              <span className="flex items-center gap-1.5 text-white/60 text-[10px] font-black uppercase tracking-widest">
+                <Clock size={12} className="text-[#E87722]" /> {readingTime} min read
+              </span>
+            </div>
+            <h1 className="text-2xl md:text-5xl lg:text-6xl font-black mb-8 md:mb-10 leading-tight text-white drop-shadow-2xl" style={{ fontFamily: 'var(--font-display)' }}>
               {publication.title}
             </h1>
 
@@ -96,7 +132,7 @@ export default function PublicationDetail() {
               </div>
             )}
 
-            <div className="p-8 md:p-12">
+            <div className="p-6 md:p-12">
               {/* Share & Actions */}
               <div className="flex justify-end gap-3 mb-10 pb-6 border-b border-gray-100">
                 <button 
@@ -130,7 +166,7 @@ export default function PublicationDetail() {
               />
 
               {/* Author Bio Section */}
-              {(publication.authorBio || publication.authorImage) && (
+              {(bio || authorImg) && (
                 <div className="mt-20 pt-12 border-t border-gray-100 flex flex-col items-center md:items-start gap-8">
                    <div className="w-full">
                       <h5 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-8 flex items-center">
@@ -139,21 +175,23 @@ export default function PublicationDetail() {
                       </h5>
                    </div>
                    <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-                   {publication.authorImage && (
+                   {authorImg && (
                      <div className="w-20 h-20 rounded-full bg-gray-200 overflow-hidden flex-shrink-0 border-2 border-gray-100 shadow-sm">
                         <img 
-                          src={publication.authorImage} 
+                          src={authorImg} 
                           alt={publication.author} 
+                          loading="lazy"
                           className="w-full h-full object-cover" 
                         />
                      </div>
                    )}
                    <div className="text-center md:text-left">
                       <h4 className="text-lg font-bold text-[#1B3B5F] mb-2">{publication.author}</h4>
-                      {publication.authorBio && (
-                        <p className="text-gray-500 text-sm italic leading-relaxed">
-                          {publication.authorBio}
-                        </p>
+                      {bio && (
+                        <p 
+                          className="text-gray-500 text-sm italic leading-relaxed"
+                          dangerouslySetInnerHTML={{ __html: bio }}
+                        />
                       )}
                    </div>
                    </div>

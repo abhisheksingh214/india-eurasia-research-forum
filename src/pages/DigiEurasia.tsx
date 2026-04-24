@@ -107,7 +107,7 @@ export default function DigiEurasia() {
                       className="w-full h-full object-cover transition-transform duration-[4s] group-hover:scale-110" 
                       alt="" 
                    />
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                    <div className="absolute bottom-10 left-10 right-10 translate-y-10 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
                       <div className="flex items-center gap-2 text-[#E87722] text-[10px] font-black uppercase tracking-[0.2em] mb-2">
                         <MapPin size={14} /> {img.location}

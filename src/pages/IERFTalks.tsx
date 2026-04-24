@@ -22,7 +22,7 @@ export default function IERFTalks() {
           animate={{ opacity: 1, y: 0 }}
           className="max-w-xl w-full bg-white rounded-[2.5rem] p-12 text-center shadow-[0_20px_50px_-15px_rgba(27,59,95,0.1)] border border-gray-100 relative overflow-hidden"
         >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#E87722]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1B3B5F]/40 via-[#1B3B5F]/0 to-[#1B3B5F]/60"></div>
           
           <div className="w-20 h-20 bg-[#E87722]/10 rounded-2xl flex items-center justify-center text-[#E87722] mx-auto mb-8 shadow-sm scale-110">
             <MessageSquare size={40} />

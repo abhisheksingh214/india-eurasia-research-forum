@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Phone, Send, ArrowRight, MessageSquare, CheckCircle, RefreshCcw } from 'lucide-react';
+import { Mail, MapPin, Phone, ArrowRight, MessageSquare, CheckCircle, RefreshCcw } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import SubHero from '../components/SubHero';
 import { useContent } from '../context/ContentContext';
 
 export default function Contact() {
   const { content } = useContent();
+  if (!content || !content.contact) return null;
   const c = content.contact;
   const contactIcons = [<Mail size={24} />, <MapPin size={24} />, <Phone size={24} />];
 

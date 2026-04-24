@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { Calendar, Quote, ArrowRight } from 'lucide-react';
 import SubHero from '../components/SubHero';
 import { useContent } from '../context/ContentContext';
+import GangaLogo from '../components/GangaLogo';
 
 export default function VolgaToGanga() {
   const { content } = useContent();
@@ -17,6 +18,7 @@ export default function VolgaToGanga() {
       <section className="py-24 relative overflow-hidden">
         {/* Decorative Background */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E87722] opacity-[0.02] rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1B3B5F]/40 via-[#1B3B5F]/0 to-[#1B3B5F]/60 z-10"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#1B3B5F] opacity-[0.03] rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2"></div>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -32,8 +34,8 @@ export default function VolgaToGanga() {
                viewport={{ once: true }}
                className="flex justify-center mb-16"
             >
-              <div className="h-64 flex items-center justify-center">
-                <img src="/ganga-logo.svg" alt="Volga to Ganga Logo" className="h-full object-contain" />
+              <div className="h-64 scale-125 flex items-center justify-center">
+                <GangaLogo className="w-full h-full" />
               </div>
             </motion.div>
             
