@@ -386,8 +386,10 @@ export default function Admin() {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('home');
   const [saved, setSaved] = useState(false);
-  const { content, updateContent, resetToDefaults, exportContent, importContent } = useContent();
+  const { content, updateContent, resetToDefaults, exportContent, importContent, saveToGitHub } = useContent();
   const [draft, setDraft] = useState<SiteContent>(content);
+  const [isSaving, setIsSaving] = useState(false);
+  const [deployStatus, setDeployStatus] = useState<'idle' | 'deploying' | 'error'>('idle');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [inquiries, setInquiries] = useState<{ type: 'newsletter' | 'contact', data: any, date: string }[]>(() => {
@@ -411,7 +413,29 @@ export default function Admin() {
   const handleSave = async () => {
     updateContent(draft);
     if (isProduction) {
-      alert('Note: Automatic save is disabled in the online version. Please use the "Export" button below to download your changes and update the siteContent.ts manually.');
+      // Save directly to GitHub, which triggers CI/CD auto-deploy
+      setIsSaving(true);
+      setDeployStatus('idle');
+      try {
+        const result = await saveToGitHub(draft);
+        if (result.success) {
+          setSaved(true);
+          setDeployStatus('deploying');
+          setTimeout(() => setSaved(false), 4000);
+          // Clear deploying status after estimated deploy time
+          setTimeout(() => setDeployStatus('idle'), 180000);
+        } else {
+          setDeployStatus('error');
+          alert('Save failed: ' + result.message);
+          setTimeout(() => setDeployStatus('idle'), 5000);
+        }
+      } catch (e: any) {
+        setDeployStatus('error');
+        alert('Unexpected error: ' + e.message);
+        setTimeout(() => setDeployStatus('idle'), 5000);
+      } finally {
+        setIsSaving(false);
+      }
       return;
     }
     try {
@@ -924,18 +948,29 @@ export default function Admin() {
             <button onClick={() => { if (confirm('Reset all content to defaults? This cannot be undone.')) { resetToDefaults(); } }} className="flex items-center gap-2 px-4 py-2.5 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-xs font-bold hover:bg-red-500 hover:text-white transition-all shadow-sm">
               <RotateCcw size={14} /> Reset
             </button>
-            <button onClick={handleSave} className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-lg ${saved ? 'bg-green-500 text-white' : 'bg-[#E87722] text-white hover:bg-orange-600 hover:shadow-[0_0_20px_rgba(232,119,34,0.4)]'}`}>
-              <Save size={14} /> {saved ? 'Saved!' : 'Save'}
+            <button onClick={handleSave} disabled={isSaving} className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-lg disabled:opacity-60 disabled:cursor-not-allowed ${saved ? 'bg-green-500 text-white' : isSaving ? 'bg-[#E87722]/70 text-white' : 'bg-[#E87722] text-white hover:bg-orange-600 hover:shadow-[0_0_20px_rgba(232,119,34,0.4)]'}`}>
+              {isSaving ? <RotateCcw size={14} className="animate-spin" /> : <Save size={14} />}
+              {isSaving ? 'Saving...' : saved ? 'Saved!' : 'Save'}
             </button>
           </div>
         </div>
 
-        {isProduction && (
-          <div className="bg-[#E87722]/10 border-b border-[#E87722]/20 px-8 py-3">
+        {isProduction && deployStatus === 'deploying' && (
+          <div className="bg-green-500/10 border-b border-green-500/20 px-8 py-3">
             <div className="flex items-center gap-3">
-              <div className="w-2 h-2 bg-[#E87722] rounded-full animate-pulse" />
-              <p className="text-[#E87722] text-[11px] font-black uppercase tracking-widest">
-                Production Mode: Save & Upload are local-only. Use "Export" to preserve changes.
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <p className="text-green-400 text-[11px] font-black uppercase tracking-widest">
+                ✓ Content committed to GitHub — Auto-deploying to live site (~2-3 min)
+              </p>
+            </div>
+          </div>
+        )}
+        {isProduction && deployStatus === 'error' && (
+          <div className="bg-red-500/10 border-b border-red-500/20 px-8 py-3">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-red-500 rounded-full" />
+              <p className="text-red-400 text-[11px] font-black uppercase tracking-widest">
+                ✕ Save failed — Try again or use Export as a backup
               </p>
             </div>
           </div>
