@@ -390,6 +390,7 @@ export default function Admin() {
   const [draft, setDraft] = useState<SiteContent>(content);
   const [isSaving, setIsSaving] = useState(false);
   const [deployStatus, setDeployStatus] = useState<'idle' | 'deploying' | 'error'>('idle');
+  const [deployError, setDeployError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [inquiries, setInquiries] = useState<{ type: 'newsletter' | 'contact', data: any, date: string }[]>(() => {
@@ -425,13 +426,13 @@ export default function Admin() {
           // Clear deploying status after estimated deploy time
           setTimeout(() => setDeployStatus('idle'), 180000);
         } else {
+          setDeployError(result.message);
           setDeployStatus('error');
-          alert('Save failed: ' + result.message);
           setTimeout(() => setDeployStatus('idle'), 5000);
         }
       } catch (e: any) {
+        setDeployError(e.message);
         setDeployStatus('error');
-        alert('Unexpected error: ' + e.message);
         setTimeout(() => setDeployStatus('idle'), 5000);
       } finally {
         setIsSaving(false);
@@ -451,11 +452,15 @@ export default function Admin() {
         setTimeout(() => setSaved(false), 2000);
       } else {
         const err = await resp.json();
-        alert('Failed to save to codebase: ' + (err.error || 'Unknown error'));
+        setDeployError('Failed to save to codebase: ' + (err.error || 'Unknown error'));
+        setDeployStatus('error');
+        setTimeout(() => setDeployStatus('idle'), 5000);
       }
     } catch (e) {
       console.error(e);
-      alert('Network error: Could not save to codebase. Are you running the dev server?');
+      setDeployError('Network error: Could not save to codebase. Are you running the dev server?');
+      setDeployStatus('error');
+      setTimeout(() => setDeployStatus('idle'), 5000);
     }
   };
 
@@ -970,7 +975,7 @@ export default function Admin() {
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 bg-red-500 rounded-full" />
               <p className="text-red-400 text-[11px] font-black uppercase tracking-widest">
-                ✕ Save failed — Try again or use Export as a backup
+                ✕ Save failed: {deployError || 'Try again or use Export as a backup'}
               </p>
             </div>
           </div>
